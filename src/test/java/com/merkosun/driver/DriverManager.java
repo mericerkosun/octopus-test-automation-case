@@ -1,5 +1,6 @@
 package com.merkosun.driver;
 
+import com.merkosun.config.ConfigManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -20,8 +21,9 @@ public class DriverManager {
 
             WebDriver driver = new ChromeDriver(options);
 
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-            driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
+            ConfigManager config = ConfigManager.getInstance();
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(config.implicitWait()));
+            driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(config.pageLoadTimeout()));
 
             driverThreadLocal.set(driver);
         }

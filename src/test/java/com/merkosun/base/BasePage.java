@@ -1,5 +1,6 @@
 package com.merkosun.base;
 
+import com.merkosun.config.ConfigManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,7 +16,8 @@ public abstract class BasePage {
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(this.driver, Duration.ofSeconds(10));
+        ConfigManager config = ConfigManager.getInstance();
+        this.wait = new WebDriverWait(this.driver, Duration.ofSeconds(config.explicitWait()));
     }
 
     protected void clickToElement(By locator) {
