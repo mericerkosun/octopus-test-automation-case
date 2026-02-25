@@ -40,3 +40,7 @@ build/
 
 ### Docs ###
 docs/
+
+### Allure ###
+allure-results/
+allure-report/
