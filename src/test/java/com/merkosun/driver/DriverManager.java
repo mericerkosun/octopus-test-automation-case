@@ -22,7 +22,6 @@ public class DriverManager {
             WebDriver driver = new ChromeDriver(options);
 
             ConfigManager config = ConfigManager.getInstance();
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(config.implicitWait()));
             driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(config.pageLoadTimeout()));
 
             driverThreadLocal.set(driver);

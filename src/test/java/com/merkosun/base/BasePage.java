@@ -4,6 +4,7 @@ import com.merkosun.config.ConfigManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -43,4 +44,15 @@ public abstract class BasePage {
             return false;
         }
     }
+
+    protected void selectOptionByIndex(By locator, int index) {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        new Select(element).selectByIndex(index);
+    }
+
+    protected void selectOptionByVisibleText(By locator, String text) {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        new Select(element).selectByVisibleText(text);
+    }
+
 }
