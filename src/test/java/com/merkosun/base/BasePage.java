@@ -35,4 +35,12 @@ public abstract class BasePage {
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         return element.getText();
     }
+
+    protected boolean isElementVisible(By locator) {
+        try {
+            return wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }
