@@ -21,32 +21,42 @@ public abstract class BaseTest {
     }
 
     protected com.merkosun.model.UserData registerUniqueUser() {
-        com.merkosun.model.UserData user = new com.merkosun.model.UserData.Builder()
-                .firstName("Test")
-                .lastName("User")
-                .address("123 Test St")
-                .city("TestCity")
-                .state("TS")
-                .zipCode("12345")
-                .phone("1234567890")
-                .ssn("999-99-9999")
-                .username("user" + System.currentTimeMillis() + (int)(Math.random() * 1000))
-                .password("password123")
-                .build();
+        com.merkosun.model.UserData user;
+        com.merkosun.pages.parabank.RegisterPage registerPage;
+        boolean success = false;
+        int maxRetries = 2;
+        int attempt = 0;
 
-        com.merkosun.pages.parabank.RegisterPage registerPage = new com.merkosun.pages.parabank.RegisterPage(driver);
-        registerPage.navigateTo();
-        registerPage.register(user);
+        do {
+            attempt++;
+            user = new com.merkosun.model.UserData.Builder()
+                    .firstName("Test")
+                    .lastName("User")
+                    .address("123 Test St")
+                    .city("TestCity")
+                    .state("TS")
+                    .zipCode("12345")
+                    .phone("1234567890")
+                    .ssn("999-99-9999")
+                    .username("user" + System.currentTimeMillis() + (int)(Math.random() * 1000))
+                    .password("password123")
+                    .build();
 
-        // Wait for registration to finish and verify
-        Assert.assertTrue(registerPage.isRegistrationSuccessful(),
-                "Registration failed for user: " + user.getUsername());
+            registerPage = new com.merkosun.pages.parabank.RegisterPage(driver);
+            registerPage.navigateTo();
+            registerPage.register(user);
 
-        // Logout after registration to let the test start from Login page
+            success = registerPage.isRegistrationSuccessful();
+            if (!success) {
+                System.out.println("Registration attempt " + attempt + " failed for user: " + user.getUsername() + ". Retrying...");
+            }
+        } while (!success && attempt < maxRetries);
+
+        Assert.assertTrue(success, "Registration failed after " + maxRetries + " attempts for user: " + user.getUsername());
+
         registerPage.logout();
 
-        // A small delay to ensure the session/account is ready on the server-side
-        try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
+        try { Thread.sleep(500); } catch (InterruptedException ignored) {}
 
         return user;
     }

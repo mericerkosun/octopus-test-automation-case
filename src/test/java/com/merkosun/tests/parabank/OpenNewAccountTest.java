@@ -67,7 +67,7 @@ public class OpenNewAccountTest extends BaseTest {
         openNewAccountPage.navigateToOpenAccount();
 
         // Formu göndermeden önce newAccountId görünmemeli
-        Assert.assertFalse(openNewAccountPage.isNewAccountCreated(),
+        Assert.assertTrue(openNewAccountPage.isNewAccountNotVisible(),
                 "New account ID should NOT be visible before the form is submitted");
     }
 }

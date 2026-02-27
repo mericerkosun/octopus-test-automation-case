@@ -40,4 +40,8 @@ public class OpenNewAccountPage extends BasePage {
     public boolean isNewAccountCreated() {
         return isElementVisible(NEW_ACCOUNT_ID);
     }
+
+    public boolean isNewAccountNotVisible() {
+        return isElementNotVisible(NEW_ACCOUNT_ID);
+    }
 }

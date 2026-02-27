@@ -47,6 +47,23 @@ public abstract class BasePage {
         }
     }
 
+    protected boolean isElementNotVisible(By locator) {
+        try {
+            return wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    protected boolean waitForTextToAppear(By locator, String text) {
+        try {
+            return wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, text));
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+
     protected void selectOptionByIndex(By locator, int index) {
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         new Select(element).selectByIndex(index);

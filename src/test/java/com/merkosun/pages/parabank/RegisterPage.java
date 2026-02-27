@@ -48,7 +48,7 @@ public class RegisterPage extends BasePage {
     }
 
     public boolean isRegistrationSuccessful() {
-        return getTextFromElement(SUCCESS_MESSAGE).contains("Welcome");
+        return waitForTextToAppear(SUCCESS_MESSAGE, "Welcome");
     }
 
     public boolean isErrorMessageVisible() {
