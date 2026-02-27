@@ -15,6 +15,8 @@ public abstract class BasePage {
     protected WebDriver driver;
     protected WebDriverWait wait;
 
+    private static final By LOGOUT_LINK = By.linkText("Log Out");
+
     public BasePage(WebDriver driver) {
         this.driver = driver;
         ConfigManager config = ConfigManager.getInstance();
@@ -53,6 +55,14 @@ public abstract class BasePage {
     protected void selectOptionByVisibleText(By locator, String text) {
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         new Select(element).selectByVisibleText(text);
+    }
+
+    public void logout() {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(LOGOUT_LINK)).click();
+        } catch (Exception e) {
+            // Ignore if not present or clickable
+        }
     }
 
 }
