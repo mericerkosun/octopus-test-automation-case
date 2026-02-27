@@ -19,6 +19,10 @@ public class DriverManager {
             options.addArguments("--start-maximized");
             options.addArguments("--disable-notifications");
 
+            if (Boolean.parseBoolean(System.getProperty("headless", "false"))) {
+                options.addArguments("--headless=new");
+            }
+
             WebDriver driver = new ChromeDriver(options);
 
             ConfigManager config = ConfigManager.getInstance();
