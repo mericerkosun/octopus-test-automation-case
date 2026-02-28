@@ -21,7 +21,7 @@ jobs:
         cache: maven
 
     - name: Run Tests with Maven
-      run: mvn test -Dheadless=true
+      run: mvn test -Dheadless=true -Dsurefire.suiteXmlFiles=src/test/resources/testng-ci.xml
 
     - name: Upload Allure Results
       if: always()

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="CI Sequential Suite" parallel="none">
+    <suite-files>
+        <suite-file path="src/test/resources/testng-parabank.xml"/>
+        <suite-file path="src/test/resources/testng-demoblaze.xml"/>
+        <suite-file path="src/test/resources/testng-saucedemo.xml"/>
+        <suite-file path="src/test/resources/testng-herokuapp.xml"/>
+        <suite-file path="src/test/resources/testng-uitap.xml"/>
+    </suite-files>
+</suite>

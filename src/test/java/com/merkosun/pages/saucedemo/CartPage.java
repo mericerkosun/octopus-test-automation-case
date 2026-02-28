@@ -50,7 +50,6 @@ public class CartPage extends BasePage {
     }
 
     public void clickCheckout() {
-        scrollIntoView(CHECKOUT_BUTTON);
         clickToElement(CHECKOUT_BUTTON);
     }
 

@@ -29,13 +29,10 @@ public class ProductsPage extends BasePage {
     }
 
     public void addToCartByIndex(int index) {
-        int currentCount = getCartBadgeCount();
         List<WebElement> addButtons = driver.findElements(
                 By.cssSelector(".inventory_item button")
         );
         addButtons.get(index).click();
-        // Wait for badge to update
-        wait.until(d -> getCartBadgeCount() > currentCount);
     }
 
     public int getCartBadgeCount() {
