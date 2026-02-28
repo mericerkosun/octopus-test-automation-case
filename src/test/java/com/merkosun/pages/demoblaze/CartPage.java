@@ -39,8 +39,14 @@ public class CartPage extends Navbar {
     }
 
     public void deleteFirstItem() {
+        List<WebElement> itemsBefore = driver.findElements(CART_ITEMS);
         clickToElement(DELETE_BUTTONS);
-        try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
+        if (!itemsBefore.isEmpty()) {
+            try {
+                new org.openqa.selenium.support.ui.WebDriverWait(driver, java.time.Duration.ofSeconds(3))
+                        .until(ExpectedConditions.stalenessOf(itemsBefore.get(0)));
+            } catch (Exception ignored) {}
+        }
     }
 
     public String getTotalPrice() {

@@ -58,7 +58,10 @@ public abstract class BaseTest {
 
         registerPage.logout();
 
-        try { Thread.sleep(500); } catch (InterruptedException ignored) {}
+        try {
+            new org.openqa.selenium.support.ui.WebDriverWait(getDriver(), java.time.Duration.ofSeconds(5))
+                    .until(org.openqa.selenium.support.ui.ExpectedConditions.urlContains("index.htm"));
+        } catch (Exception ignored) {}
 
         return user;
     }
