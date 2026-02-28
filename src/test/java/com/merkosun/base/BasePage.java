@@ -109,4 +109,12 @@ public abstract class BasePage {
         driver.switchTo().alert().dismiss();
     }
 
+    public Object executeJavaScript(String script, Object... args) {
+        return ((org.openqa.selenium.JavascriptExecutor) driver).executeScript(script, args);
+    }
+
+    public void scrollToBottom() {
+        executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
+    }
+
 }

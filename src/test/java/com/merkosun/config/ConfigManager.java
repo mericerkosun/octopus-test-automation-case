@@ -27,6 +27,12 @@ public interface ConfigManager extends Config {
     @Key("theinternet.base.url")
     String theinternetBaseUrl();
 
+    @Key("theinternet.upload.url")
+    String theinternetUploadUrl();
+
+    @Key("theinternet.floating.url")
+    String theinternetFloatingUrl();
+
     @Key("demoblaze.base.url")
     String demoblazeBaseUrl();
 
