@@ -147,4 +147,9 @@ public abstract class BasePage {
         }
     }
 
+    protected void uploadFileToElement(By locator, String absolutePath) {
+        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        element.sendKeys(absolutePath);
+    }
+
 }

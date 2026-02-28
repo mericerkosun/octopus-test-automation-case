@@ -17,8 +17,13 @@ public class HerokuUploadPage extends BasePage {
         super(driver);
     }
 
+    public HerokuUploadPage navigateTo() {
+        driver.get(com.merkosun.config.ConfigManager.getInstance().theinternetUploadUrl());
+        return this;
+    }
+
     public void uploadFile(String absolutePath) {
-        typeToElement(FILE_INPUT, absolutePath);
+        uploadFileToElement(FILE_INPUT, absolutePath);
         clickToElement(UPLOAD_BUTTON);
     }
 

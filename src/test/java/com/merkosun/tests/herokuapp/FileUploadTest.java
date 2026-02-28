@@ -11,9 +11,7 @@ public class FileUploadTest extends BaseTest {
 
     @Test
     public void testFileUpload() {
-        com.merkosun.config.ConfigManager config = com.merkosun.config.ConfigManager.getInstance();
-        getDriver().get(config.theinternetUploadUrl());
-        HerokuUploadPage uploadPage = new HerokuUploadPage(getDriver());
+        HerokuUploadPage uploadPage = new HerokuUploadPage(getDriver()).navigateTo();
 
         String fileName = "testfile.txt";
         String filePath = new File("src/test/resources/testdata/" + fileName).getAbsolutePath();
@@ -26,9 +24,7 @@ public class FileUploadTest extends BaseTest {
 
     @Test
     public void testFileUploadWithImage() {
-        com.merkosun.config.ConfigManager config = com.merkosun.config.ConfigManager.getInstance();
-        getDriver().get(config.theinternetUploadUrl());
-        HerokuUploadPage uploadPage = new HerokuUploadPage(getDriver());
+        HerokuUploadPage uploadPage = new HerokuUploadPage(getDriver()).navigateTo();
 
         String fileName = "test_image.png";
         String filePath = new File("src/test/resources/testdata/" + fileName).getAbsolutePath();
@@ -41,9 +37,7 @@ public class FileUploadTest extends BaseTest {
 
     @Test
     public void testFileUploadWithSpecialCharacters() {
-        com.merkosun.config.ConfigManager config = com.merkosun.config.ConfigManager.getInstance();
-        getDriver().get(config.theinternetUploadUrl());
-        HerokuUploadPage uploadPage = new HerokuUploadPage(getDriver());
+        HerokuUploadPage uploadPage = new HerokuUploadPage(getDriver()).navigateTo();
 
         String fileName = "special!@#file.txt";
         String filePath = new File("src/test/resources/testdata/" + fileName).getAbsolutePath();
@@ -56,9 +50,7 @@ public class FileUploadTest extends BaseTest {
 
     @Test
     public void testUploadWithoutFileSelection() {
-        com.merkosun.config.ConfigManager config = com.merkosun.config.ConfigManager.getInstance();
-        getDriver().get(config.theinternetUploadUrl());
-        HerokuUploadPage uploadPage = new HerokuUploadPage(getDriver());
+        HerokuUploadPage uploadPage = new HerokuUploadPage(getDriver()).navigateTo();
 
         uploadPage.clickUploadWithoutFile();
         

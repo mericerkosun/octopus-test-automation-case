@@ -16,6 +16,11 @@ public class HerokuFloatingMenuPage extends BasePage {
         super(driver);
     }
 
+    public HerokuFloatingMenuPage navigateTo() {
+        driver.get(com.merkosun.config.ConfigManager.getInstance().theinternetFloatingUrl());
+        return this;
+    }
+
     public boolean isMenuDisplayed() {
         return isElementVisible(MENU_CONTAINER) &&
                isElementVisible(HOME_LINK) &&
@@ -29,7 +34,4 @@ public class HerokuFloatingMenuPage extends BasePage {
     public void clickContact() { clickToElement(CONTACT_LINK); }
     public void clickAbout() { clickToElement(ABOUT_LINK); }
 
-    public void scrollToBottom() {
-        super.scrollToBottom();
-    }
 }

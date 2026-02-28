@@ -9,9 +9,7 @@ public class FloatingMenuTest extends BaseTest {
 
     @Test
     public void testFloatingMenuVisibilityOnScroll() {
-        com.merkosun.config.ConfigManager config = com.merkosun.config.ConfigManager.getInstance();
-        getDriver().get(config.theinternetFloatingUrl());
-        HerokuFloatingMenuPage floatingMenuPage = new HerokuFloatingMenuPage(getDriver());
+        HerokuFloatingMenuPage floatingMenuPage = new HerokuFloatingMenuPage(getDriver()).navigateTo();
 
         Assert.assertTrue(floatingMenuPage.isMenuDisplayed(), "Menu should be visible at the top");
 
@@ -21,9 +19,7 @@ public class FloatingMenuTest extends BaseTest {
 
     @Test
     public void testMenuLinksNavigation() {
-        com.merkosun.config.ConfigManager config = com.merkosun.config.ConfigManager.getInstance();
-        getDriver().get(config.theinternetFloatingUrl());
-        HerokuFloatingMenuPage floatingMenuPage = new HerokuFloatingMenuPage(getDriver());
+        HerokuFloatingMenuPage floatingMenuPage = new HerokuFloatingMenuPage(getDriver()).navigateTo();
 
         floatingMenuPage.clickNews();
         Assert.assertTrue(getDriver().getCurrentUrl().contains("#news"), "Should navigate to news section");
@@ -35,9 +31,7 @@ public class FloatingMenuTest extends BaseTest {
 
     @Test
     public void testMenuVisibilityOnResize() {
-        com.merkosun.config.ConfigManager config = com.merkosun.config.ConfigManager.getInstance();
-        getDriver().get(config.theinternetFloatingUrl());
-        HerokuFloatingMenuPage floatingMenuPage = new HerokuFloatingMenuPage(getDriver());
+        HerokuFloatingMenuPage floatingMenuPage = new HerokuFloatingMenuPage(getDriver()).navigateTo();
 
         getDriver().manage().window().setSize(new org.openqa.selenium.Dimension(800, 600));
         Assert.assertTrue(floatingMenuPage.isMenuDisplayed(), "Menu should be visible on smaller screen");
