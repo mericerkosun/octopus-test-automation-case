@@ -81,8 +81,6 @@ mvn allure:serve
 *Örnek Rapor Görünümü:*
 ![Allure Raporu](docs/images/allure_report.png)
 
-> **İpucu:** Kendi koşumunuzdan bir ekran görüntüsü alıp `docs/images/allure_report.png` olarak kaydedebilirsiniz.
-
 ## 🤖 CI Entegrasyonu
 
 Proje, GitHub Actions ile entegre edilmiştir. `.github/workflows/maven.yml` dosyası sayesinde her commit sonrası testler GitHub sunucularında otomatik olarak koşar ve rapor sonuçları artifakt olarak saklanır.
