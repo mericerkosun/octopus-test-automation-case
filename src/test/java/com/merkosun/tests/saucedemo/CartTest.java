@@ -13,23 +13,15 @@ import java.util.List;
 
 public class CartTest extends BaseTest {
 
-    private ProductsPage productsPage;
-    private CartPage cartPage;
-
-    @BeforeMethod
-    public void setupCartTests() {
-        ConfigManager config = ConfigManager.getInstance();
-        
-        new LoginPage(driver)
-                .navigateTo(config.saucedemoBaseUrl())
-                .login("standard_user", "secret_sauce");
-        
-        productsPage = new ProductsPage(driver);
-        cartPage = new CartPage(driver);
-    }
-
     @Test
     public void addedItemShouldBeListedInCartTest() {
+        ConfigManager config = ConfigManager.getInstance();
+        new LoginPage(getDriver())
+                .navigateTo(config.saucedemoBaseUrl())
+                .login("standard_user", "secret_sauce");
+        ProductsPage productsPage = new ProductsPage(getDriver());
+        CartPage cartPage = new CartPage(getDriver());
+
         String expectedProductName = productsPage.getFirstProductName();
         productsPage.addToCartByIndex(0);
         
@@ -42,8 +34,16 @@ public class CartTest extends BaseTest {
                 "Cart does not contain the expected product: " + expectedProductName);
     }
 
+
     @Test
     public void removedItemShouldDisappearFromCartTest() {
+        ConfigManager config = ConfigManager.getInstance();
+        new LoginPage(getDriver())
+                .navigateTo(config.saucedemoBaseUrl())
+                .login("standard_user", "secret_sauce");
+        ProductsPage productsPage = new ProductsPage(getDriver());
+        CartPage cartPage = new CartPage(getDriver());
+
         productsPage.addToCartByIndex(0);
         productsPage.addToCartByIndex(1);
         productsPage.goToCart();
@@ -56,31 +56,48 @@ public class CartTest extends BaseTest {
         Assert.assertEquals(cartPage.getCartBadgeCount(), 1, "Cart badge should show 1 after removing an item");
     }
 
+
     @Test
     public void continueShoppingButtonShouldRedirectToProductsPageTest() {
+        ConfigManager config = ConfigManager.getInstance();
+        new LoginPage(getDriver())
+                .navigateTo(config.saucedemoBaseUrl())
+                .login("standard_user", "secret_sauce");
+        ProductsPage productsPage = new ProductsPage(getDriver());
+        CartPage cartPage = new CartPage(getDriver());
+
         productsPage.goToCart();
         cartPage.clickContinueShopping();
 
-        String currentUrl = driver.getCurrentUrl();
+        String currentUrl = getDriver().getCurrentUrl();
         Assert.assertNotNull(currentUrl, "Current URL is null");
         Assert.assertTrue(currentUrl.contains("inventory.html"),
                 "Continue Shopping button should redirect to Products page");
 
     }
 
+
     @Test
     public void emptyCartCheckoutShouldNavigateToCheckoutStepOneTest() {
+        ConfigManager config = ConfigManager.getInstance();
+        new LoginPage(getDriver())
+                .navigateTo(config.saucedemoBaseUrl())
+                .login("standard_user", "secret_sauce");
+        ProductsPage productsPage = new ProductsPage(getDriver());
+        CartPage cartPage = new CartPage(getDriver());
+
         productsPage.goToCart();
 
         Assert.assertEquals(cartPage.getCartItemCount(), 0, "Cart should be empty before checkout");
 
         cartPage.clickCheckout();
 
-        String currentUrl = driver.getCurrentUrl();
+        String currentUrl = getDriver().getCurrentUrl();
         Assert.assertNotNull(currentUrl, "Current URL is null");
         Assert.assertTrue(currentUrl.contains("checkout-step-one.html"),
                 "Checkout button did not navigate to Checkout Step One page");
 
     }
+
 
 }

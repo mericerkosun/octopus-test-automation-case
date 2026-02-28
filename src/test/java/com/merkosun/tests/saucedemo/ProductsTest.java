@@ -12,19 +12,14 @@ import org.testng.annotations.Test;
 
 public class ProductsTest extends BaseTest {
 
-    private ProductsPage productsPage;
-
-    @BeforeMethod
-    public void loginAndNavigate() {
-        ConfigManager config = ConfigManager.getInstance();
-        new LoginPage(driver)
-                .navigateTo(config.saucedemoBaseUrl())
-                .login("standard_user", "secret_sauce");
-        productsPage = new ProductsPage(driver);
-    }
-
     @Test
     public void productsAreListedTest() {
+        ConfigManager config = ConfigManager.getInstance();
+        new LoginPage(getDriver())
+                .navigateTo(config.saucedemoBaseUrl())
+                .login("standard_user", "secret_sauce");
+        ProductsPage productsPage = new ProductsPage(getDriver());
+        
         int count = productsPage.getProductCount();
         Assert.assertTrue(count > 0,
                 "Expected at least one product on the inventory page, but found: " + count);
@@ -32,6 +27,12 @@ public class ProductsTest extends BaseTest {
 
     @Test
     public void addSingleItemToCartTest() {
+        ConfigManager config = ConfigManager.getInstance();
+        new LoginPage(getDriver())
+                .navigateTo(config.saucedemoBaseUrl())
+                .login("standard_user", "secret_sauce");
+        ProductsPage productsPage = new ProductsPage(getDriver());
+
         productsPage.addToCartByIndex(0);
 
         int badge = productsPage.getCartBadgeCount();
@@ -39,8 +40,15 @@ public class ProductsTest extends BaseTest {
                 "Cart badge should show 1 after adding one item, but showed: " + badge);
     }
 
+
     @Test
     public void addMultipleItemsToCartTest() {
+        ConfigManager config = ConfigManager.getInstance();
+        new LoginPage(getDriver())
+                .navigateTo(config.saucedemoBaseUrl())
+                .login("standard_user", "secret_sauce");
+        ProductsPage productsPage = new ProductsPage(getDriver());
+
         productsPage.addToCartByIndex(0);
         productsPage.addToCartByIndex(1);
 
@@ -51,7 +59,14 @@ public class ProductsTest extends BaseTest {
 
     @Test
     public void sortByNameZtoATest() {
+        ConfigManager config = ConfigManager.getInstance();
+        new LoginPage(getDriver())
+                .navigateTo(config.saucedemoBaseUrl())
+                .login("standard_user", "secret_sauce");
+        ProductsPage productsPage = new ProductsPage(getDriver());
+
         // 1. Sıralamadan önce sayfadaki listeyi alıp Java'da ters sıralıyoruz (Z-A)
+
         List<String> expectedNames = productsPage.getAllProductNames();
         expectedNames.sort(Collections.reverseOrder());
 
@@ -67,6 +82,12 @@ public class ProductsTest extends BaseTest {
 
     @Test
     public void sortByNameAtoZTest() {
+        ConfigManager config = ConfigManager.getInstance();
+        new LoginPage(getDriver())
+                .navigateTo(config.saucedemoBaseUrl())
+                .login("standard_user", "secret_sauce");
+        ProductsPage productsPage = new ProductsPage(getDriver());
+
         // Sayfa zaten ilk başta A-Z geliyor ama önce Z-A yapıp sonra tekrar A-Z yaparak test edelim
         productsPage.sortBy("Name (Z to A)");
 
@@ -81,6 +102,12 @@ public class ProductsTest extends BaseTest {
 
     @Test
     public void sortByPriceLowToHighTest() {
+        ConfigManager config = ConfigManager.getInstance();
+        new LoginPage(getDriver())
+                .navigateTo(config.saucedemoBaseUrl())
+                .login("standard_user", "secret_sauce");
+        ProductsPage productsPage = new ProductsPage(getDriver());
+
         List<Double> expectedPrices = productsPage.getAllProductPrices();
         Collections.sort(expectedPrices);
 
@@ -92,6 +119,12 @@ public class ProductsTest extends BaseTest {
 
     @Test
     public void sortByPriceHighToLowTest() {
+        ConfigManager config = ConfigManager.getInstance();
+        new LoginPage(getDriver())
+                .navigateTo(config.saucedemoBaseUrl())
+                .login("standard_user", "secret_sauce");
+        ProductsPage productsPage = new ProductsPage(getDriver());
+
         List<Double> expectedPrices = productsPage.getAllProductPrices();
         expectedPrices.sort(Collections.reverseOrder());
 
@@ -100,5 +133,6 @@ public class ProductsTest extends BaseTest {
 
         Assert.assertEquals(actualPrices, expectedPrices, "Price (High to Low) sorting failed");
     }
+
 
 }

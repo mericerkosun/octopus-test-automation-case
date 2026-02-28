@@ -12,25 +12,16 @@ import org.testng.annotations.Test;
 
 public class CheckoutTest extends BaseTest {
 
-    private ProductsPage productsPage;
-    private CartPage cartPage;
-    private CheckoutPage checkoutPage;
-
-    @BeforeMethod
-    public void setupCheckoutTests() {
-        ConfigManager config = ConfigManager.getInstance();
-
-        new LoginPage(driver)
-                .navigateTo(config.saucedemoBaseUrl())
-                .login("standard_user", "secret_sauce");
-
-        productsPage = new ProductsPage(driver);
-        cartPage = new CartPage(driver);
-        checkoutPage = new CheckoutPage(driver);
-    }
-
     @Test
     public void successfulEndToEndCheckoutTest() {
+        ConfigManager config = ConfigManager.getInstance();
+        new LoginPage(getDriver())
+                .navigateTo(config.saucedemoBaseUrl())
+                .login("standard_user", "secret_sauce");
+        ProductsPage productsPage = new ProductsPage(getDriver());
+        CartPage cartPage = new CartPage(getDriver());
+        CheckoutPage checkoutPage = new CheckoutPage(getDriver());
+
         productsPage.addToCartByIndex(0);
         productsPage.goToCart();
         cartPage.clickCheckout();
@@ -45,8 +36,17 @@ public class CheckoutTest extends BaseTest {
 
     }
 
+
     @Test
     public void emptyInformationShouldShowErrorTest() {
+        ConfigManager config = ConfigManager.getInstance();
+        new LoginPage(getDriver())
+                .navigateTo(config.saucedemoBaseUrl())
+                .login("standard_user", "secret_sauce");
+        ProductsPage productsPage = new ProductsPage(getDriver());
+        CartPage cartPage = new CartPage(getDriver());
+        CheckoutPage checkoutPage = new CheckoutPage(getDriver());
+
         productsPage.goToCart();
         cartPage.clickCheckout();
 
@@ -57,15 +57,25 @@ public class CheckoutTest extends BaseTest {
 
     }
 
+
     @Test
     public void cancelCheckoutShouldNavigateToCartTest() {
+        ConfigManager config = ConfigManager.getInstance();
+        new LoginPage(getDriver())
+                .navigateTo(config.saucedemoBaseUrl())
+                .login("standard_user", "secret_sauce");
+        ProductsPage productsPage = new ProductsPage(getDriver());
+        CartPage cartPage = new CartPage(getDriver());
+        CheckoutPage checkoutPage = new CheckoutPage(getDriver());
+
         productsPage.goToCart();
         cartPage.clickCheckout();
 
         checkoutPage.clickCancel();
 
-        String currentUrl = driver.getCurrentUrl();
+        String currentUrl = getDriver().getCurrentUrl();
         Assert.assertNotNull(currentUrl, "Current URL is null");
         Assert.assertTrue(currentUrl.contains("cart.html"), "Cancel button did not redirect to Cart page");
     }
+
 }

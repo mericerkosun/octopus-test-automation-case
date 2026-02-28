@@ -9,19 +9,14 @@ import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest {
 
-    private LoginPage loginPage;
-
-    @BeforeMethod
-    public void navigateToLoginPage() {
-        ConfigManager config = ConfigManager.getInstance();
-        loginPage = new LoginPage(driver).navigateTo(config.saucedemoBaseUrl());
-    }
-
     @Test
     public void successfulLoginTest() {
+        ConfigManager config = ConfigManager.getInstance();
+        LoginPage loginPage = new LoginPage(getDriver()).navigateTo(config.saucedemoBaseUrl());
         loginPage.login("standard_user", "secret_sauce");
 
-        String currentUrl = driver.getCurrentUrl();
+
+        String currentUrl = getDriver().getCurrentUrl();
         Assert.assertNotNull(currentUrl, "URL returned null, page could not be loaded");
         Assert.assertTrue(
                 currentUrl.contains("inventory"),
@@ -31,7 +26,10 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void lockedOutUserLoginTest() {
+        ConfigManager config = ConfigManager.getInstance();
+        LoginPage loginPage = new LoginPage(getDriver()).navigateTo(config.saucedemoBaseUrl());
         loginPage.login("locked_out_user", "secret_sauce");
+
 
         Assert.assertTrue(
                 loginPage.isErrorMessageDisplayed(),
@@ -45,7 +43,10 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void invalidPasswordLoginTest() {
+        ConfigManager config = ConfigManager.getInstance();
+        LoginPage loginPage = new LoginPage(getDriver()).navigateTo(config.saucedemoBaseUrl());
         loginPage.login("standard_user", "wrong_password");
+
 
         Assert.assertTrue(
                 loginPage.isErrorMessageDisplayed(),
@@ -55,7 +56,10 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void emptyFieldsLoginTest() {
+        ConfigManager config = ConfigManager.getInstance();
+        LoginPage loginPage = new LoginPage(getDriver()).navigateTo(config.saucedemoBaseUrl());
         loginPage.login("", "");
+
 
         Assert.assertTrue(
                 loginPage.isErrorMessageDisplayed(),
