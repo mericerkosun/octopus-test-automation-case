@@ -27,6 +27,9 @@ public interface ConfigManager extends Config {
     @Key("theinternet.base.url")
     String theinternetBaseUrl();
 
+    @Key("demoblaze.base.url")
+    String demoblazeBaseUrl();
+
     static ConfigManager getInstance() {
         return ConfigFactory.create(ConfigManager.class);
     }
