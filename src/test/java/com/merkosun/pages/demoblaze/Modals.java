@@ -55,14 +55,17 @@ public class Modals extends BasePage {
     }
 
     public void clickCloseSignup() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(SIGNUP_CLOSE_BUTTON));
         clickToElement(SIGNUP_CLOSE_BUTTON);
     }
 
     public void clickCloseLogin() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_CLOSE_BUTTON));
         clickToElement(LOGIN_CLOSE_BUTTON);
     }
 
     public void clickCloseContact() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(CONTACT_CLOSE_BUTTON));
         clickToElement(CONTACT_CLOSE_BUTTON);
     }
 
