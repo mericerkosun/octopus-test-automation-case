@@ -1,16 +1,19 @@
-# Use Maven with OpenJDK 21
-FROM maven:3.9.6-eclipse-temurin-21-jammy
+# Use Maven with JDK 21 on Alpine (reliable for Chromium on ARM64)
+FROM maven:3.9.6-eclipse-temurin-21-alpine
 
-# Install Chrome and dependencies
-RUN apt-get update && apt-get install -y \
-    wget \
-    gnupg \
-    unzip \
-    && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-    && echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.xml \
-    && apt-get update && apt-get install -y \
-    google-chrome-stable \
-    && rm -rf /var/lib/apt/lists/*
+# Install Chromium, ChromeDriver and required libraries for Alpine
+RUN apk add --no-cache \
+    chromium \
+    chromium-chromedriver \
+    nss \
+    freetype \
+    harfbuzz \
+    ca-certificates \
+    ttf-freefont \
+    udev
+
+# Chromium path on Alpine
+ENV CHROME_BIN=/usr/bin/chromium-browser
 
 # Set working directory
 WORKDIR /app
@@ -23,4 +26,4 @@ RUN mvn dependency:go-offline
 COPY . .
 
 # Default command: run all tests in headless mode
-ENTRYPOINT ["mvn", "test", "-Dheadless=true"]
+CMD ["mvn", "test", "-Dheadless=true"]

@@ -5,5 +5,4 @@ services:
     environment:
       - headless=true
     volumes:
-      - ./allure-results:/app/target/allure-results
-    command: mvn test -Dheadless=true
+      - ./target/allure-results:/app/target/allure-results
