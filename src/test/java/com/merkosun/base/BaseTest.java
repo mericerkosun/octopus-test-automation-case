@@ -8,11 +8,13 @@ import org.testng.annotations.BeforeMethod;
 
 public abstract class BaseTest {
 
-    protected WebDriver driver;
+    protected WebDriver getDriver() {
+        return DriverManager.getDriver();
+    }
 
     @BeforeMethod
     public void setup() {
-        driver = DriverManager.getDriver();
+        // Driver is initialized on first call to getDriver() in test
     }
 
     @AfterMethod
@@ -42,7 +44,7 @@ public abstract class BaseTest {
                     .password("password123")
                     .build();
 
-            registerPage = new com.merkosun.pages.parabank.RegisterPage(driver);
+            registerPage = new com.merkosun.pages.parabank.RegisterPage(getDriver());
             registerPage.navigateTo();
             registerPage.register(user);
 
