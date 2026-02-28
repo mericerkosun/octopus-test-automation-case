@@ -117,4 +117,34 @@ public abstract class BasePage {
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
     }
 
+    protected boolean waitForUrlContains(String urlPart) {
+        try {
+            return wait.until(ExpectedConditions.urlContains(urlPart));
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    protected void waitForElementsToBePresent(By locator) {
+        wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(locator, 0));
+    }
+
+    protected java.util.List<WebElement> waitForElementsVisible(By locator) {
+        return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+    }
+
+    public String getAlertTextAndAccept() {
+        String text = getAlertText();
+        acceptAlert();
+        return text;
+    }
+
+    protected void waitForStaleness(WebElement element) {
+        try {
+            wait.until(ExpectedConditions.stalenessOf(element));
+        } catch (Exception ignored) {
+            // If already stale or timeout, we can proceed
+        }
+    }
+
 }

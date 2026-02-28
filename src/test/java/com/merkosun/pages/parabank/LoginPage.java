@@ -29,11 +29,7 @@ public class LoginPage extends BasePage {
     }
 
     public boolean isLoginSuccessful() {
-        try {
-            return wait.until(ExpectedConditions.urlContains("overview.htm"));
-        } catch (Exception e) {
-            return false;
-        }
+        return waitForUrlContains("overview.htm");
     }
 
     public boolean isErrorMessageVisible() {

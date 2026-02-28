@@ -26,7 +26,7 @@ public class AccountOverviewPage extends BasePage {
     }
 
     public boolean isPageLoaded() {
-        return getTextFromElement(PAGE_TITLE).contains("Accounts Overview");
+        return waitForTextToAppear(PAGE_TITLE, "Accounts Overview");
     }
 
     public String getFirstAccountId() {
@@ -38,23 +38,21 @@ public class AccountOverviewPage extends BasePage {
     }
 
     public boolean verifyLastTransaction(String expectedType, String expectedAmount) {
-        // Transaction tablosu AJAX ile dolabilir, en az 1 satır gelene kadar bekle
         try {
-            wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(TRANSACTION_ROWS, 0));
+            waitForElementsToBePresent(TRANSACTION_ROWS);
         } catch (Exception e) {
             return false;
         }
         List<WebElement> rows = driver.findElements(TRANSACTION_ROWS);
 
-        // Parabank Activity tablosu: | Date | Description | Debit | Credit |
-        // Debit sütunu index 2, Credit sütunu index 3 → kelime satır metninde yok!
+
         int columnIndex = expectedType.equalsIgnoreCase("Debit") ? 2 : 3;
 
         for (WebElement row : rows) {
             List<WebElement> cells = row.findElements(By.tagName("td"));
             if (cells.size() > columnIndex) {
                 String cellText = cells.get(columnIndex).getText().trim();
-                // $100.00 veya 100 formatında gelebilir
+
                 if (!cellText.isEmpty() && cellText.contains(expectedAmount)) {
                     return true;
                 }

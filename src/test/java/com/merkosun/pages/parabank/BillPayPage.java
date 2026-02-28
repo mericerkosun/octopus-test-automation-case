@@ -47,6 +47,6 @@ public class BillPayPage extends BasePage {
 
     public boolean isBillPaid() {
         return isElementVisible(SUCCESS_TITLE) &&
-               getTextFromElement(SUCCESS_TITLE).contains("Bill Payment Complete");
+               waitForTextToAppear(SUCCESS_TITLE, "Bill Payment Complete");
     }
 }
