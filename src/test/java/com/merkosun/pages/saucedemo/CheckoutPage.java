@@ -29,10 +29,12 @@ public class CheckoutPage extends BasePage {
     }
 
     public void clickContinue() {
+        scrollIntoView(CONTINUE_BUTTON);
         clickToElement(CONTINUE_BUTTON);
     }
 
     public void clickCancel() {
+        scrollIntoView(CANCEL_BUTTON);
         clickToElement(CANCEL_BUTTON);
     }
 
