@@ -37,10 +37,9 @@ public class CheckoutPage extends BasePage {
     }
 
     public void clickFinish() {
-        // JS Scroll + JS Click
-        WebElement finishBtn = driver.findElement(FINISH_BUTTON);
+        WebElement finishBtn = wait.until(org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable(FINISH_BUTTON));
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView(true);", finishBtn);
+        js.executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", finishBtn);
         js.executeScript("arguments[0].click();", finishBtn);
     }
 
@@ -49,6 +48,7 @@ public class CheckoutPage extends BasePage {
     }
 
     public String getCompleteHeaderText() {
+        waitForTextToAppear(COMPLETE_HEADER, "Checkout: Complete!");
         return getTextFromElement(COMPLETE_HEADER);
     }
 }

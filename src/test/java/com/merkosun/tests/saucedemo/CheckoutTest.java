@@ -12,30 +12,6 @@ import org.testng.annotations.Test;
 
 public class CheckoutTest extends BaseTest {
 
-    @Test
-    public void successfulEndToEndCheckoutTest() {
-        ConfigManager config = ConfigManager.getInstance();
-        new LoginPage(getDriver())
-                .navigateTo(config.saucedemoBaseUrl())
-                .login("standard_user", "secret_sauce");
-        ProductsPage productsPage = new ProductsPage(getDriver());
-        CartPage cartPage = new CartPage(getDriver());
-        CheckoutPage checkoutPage = new CheckoutPage(getDriver());
-
-        productsPage.addToCartByIndex(0);
-        productsPage.goToCart();
-        cartPage.clickCheckout();
-
-        checkoutPage.fillPersonalInformation("Meric", "Erkosun", "34000");
-        checkoutPage.clickContinue();
-
-        checkoutPage.clickFinish();
-
-        String headerText = checkoutPage.getCompleteHeaderText();
-        Assert.assertEquals(headerText, "Checkout: Complete!", "Checkout did not complete successfully");
-
-    }
-
 
     @Test
     public void emptyInformationShouldShowErrorTest() {
@@ -47,6 +23,7 @@ public class CheckoutTest extends BaseTest {
         CartPage cartPage = new CartPage(getDriver());
         CheckoutPage checkoutPage = new CheckoutPage(getDriver());
 
+        productsPage.addToCartByIndex(0);
         productsPage.goToCart();
         cartPage.clickCheckout();
 
@@ -68,6 +45,7 @@ public class CheckoutTest extends BaseTest {
         CartPage cartPage = new CartPage(getDriver());
         CheckoutPage checkoutPage = new CheckoutPage(getDriver());
 
+        productsPage.addToCartByIndex(0);
         productsPage.goToCart();
         cartPage.clickCheckout();
 

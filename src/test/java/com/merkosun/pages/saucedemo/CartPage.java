@@ -34,9 +34,12 @@ public class CartPage extends BasePage {
     }
 
     public void removeFirstItem() {
+        wait.until(org.openqa.selenium.support.ui.ExpectedConditions.presenceOfAllElementsLocatedBy(REMOVE_BUTTON));
         List<WebElement> removeButtons = driver.findElements(REMOVE_BUTTON);
         if (!removeButtons.isEmpty()) {
+            int currentCount = getCartItemCount();
             removeButtons.getFirst().click();
+            wait.until(d -> getCartItemCount() < currentCount);
         }
     }
 

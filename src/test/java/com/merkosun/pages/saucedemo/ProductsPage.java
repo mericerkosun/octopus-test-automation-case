@@ -46,8 +46,7 @@ public class ProductsPage extends BasePage {
     }
 
     public void sortBy(String visibleText) {
-        WebElement dropdown = driver.findElement(SORT_DROPDOWN);
-        new Select(dropdown).selectByVisibleText(visibleText);
+        selectOptionByVisibleText(SORT_DROPDOWN, visibleText);
     }
 
     public String getFirstProductName() {
