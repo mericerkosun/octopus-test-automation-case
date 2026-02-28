@@ -5,8 +5,34 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Properties;
 
 public abstract class BaseTest {
+
+    @BeforeSuite
+    public void setupSuite() {
+        Properties props = new Properties();
+        props.setProperty("Project", "Octopus Test Automation");
+        props.setProperty("Environment", System.getProperty("headless", "false").equals("true") ? "Docker/Headless" : "Local/Headful");
+        props.setProperty("Browser", "Chromium/Chrome");
+        props.setProperty("OS", System.getProperty("os.name"));
+        props.setProperty("Architecture", System.getProperty("os.arch"));
+
+        try {
+            File resultsDir = new File("target/allure-results");
+            if (!resultsDir.exists()) resultsDir.mkdirs();
+            FileOutputStream out = new FileOutputStream("target/allure-results/environment.properties");
+            props.store(out, "Allure Environment Properties");
+            out.close();
+        } catch (IOException e) {
+            System.err.println("Could not write Allure environment properties: " + e.getMessage());
+        }
+    }
 
     protected WebDriver getDriver() {
         return DriverManager.getDriver();

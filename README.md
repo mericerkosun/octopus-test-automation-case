@@ -70,13 +70,18 @@ docker-compose up --build
 
 ## 📊 Raporlama
 
-Test sonuçlarını görsel olarak incelemek için Allure Report entegrasyonu mevcuttio.
+Test sonuçlarını görsel olarak incelemek için **Allure Report** entegrasyonu mevcuttur.
 
 1. Testleri koşturun.
 2. Raporu oluşturun ve tarayıcıda açın:
 ```bash
 mvn allure:serve
 ```
+
+*Örnek Rapor Görünümü:*
+![Allure Raporu](docs/images/allure_report.png)
+
+> **İpucu:** Kendi koşumunuzdan bir ekran görüntüsü alıp `docs/images/allure_report.png` olarak kaydedebilirsiniz.
 
 ## 🤖 CI Entegrasyonu
 
