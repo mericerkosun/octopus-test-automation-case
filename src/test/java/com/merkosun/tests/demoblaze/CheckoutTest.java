@@ -6,27 +6,19 @@ import com.merkosun.pages.demoblaze.HomePage;
 import com.merkosun.pages.demoblaze.ProductPage;
 import net.datafaker.Faker;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class CheckoutTest extends BaseTest {
 
-    private HomePage homePage;
-    private ProductPage productPage;
-    private CartPage cartPage;
-    private Faker faker;
-
-    @BeforeMethod
-    public void localSetup() {
-        homePage = new HomePage(driver);
-        productPage = new ProductPage(driver);
-        cartPage = new CartPage(driver);
-        faker = new Faker();
-        homePage.navigateTo();
-    }
+    private static final Faker faker = new Faker();
 
     @Test(description = "Verify successful product purchase flow")
     public void testSuccessfulPurchase() {
+        HomePage homePage = new HomePage(getDriver());
+        ProductPage productPage = new ProductPage(getDriver());
+        CartPage cartPage = new CartPage(getDriver());
+        homePage.navigateTo();
+
         homePage.filterByPhones();
         homePage.selectProductByName("Samsung galaxy s6");
         productPage.addToCart();
@@ -52,6 +44,11 @@ public class CheckoutTest extends BaseTest {
 
     @Test(description = "Verify purchase form validation (Negative case)")
     public void testPurchaseWithMissingInfo() {
+        HomePage homePage = new HomePage(getDriver());
+        ProductPage productPage = new ProductPage(getDriver());
+        CartPage cartPage = new CartPage(getDriver());
+        homePage.navigateTo();
+
         homePage.filterByPhones();
         homePage.selectProductByName("Samsung galaxy s6");
         productPage.addToCart();

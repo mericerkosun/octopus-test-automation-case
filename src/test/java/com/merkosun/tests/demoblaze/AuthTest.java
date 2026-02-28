@@ -5,25 +5,18 @@ import com.merkosun.pages.demoblaze.HomePage;
 import com.merkosun.pages.demoblaze.Modals;
 import net.datafaker.Faker;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class AuthTest extends BaseTest {
 
-    private HomePage homePage;
-    private Modals modals;
-    private Faker faker;
-
-    @BeforeMethod
-    public void localSetup() {
-        homePage = new HomePage(driver);
-        modals = new Modals(driver);
-        faker = new Faker();
-        homePage.navigateTo();
-    }
+    private static final Faker faker = new Faker();
 
     @Test(description = "Verify successful signup with a new user")
     public void testSuccessfulSignup() {
+        HomePage homePage = new HomePage(getDriver());
+        Modals modals = new Modals(getDriver());
+        homePage.navigateTo();
+
         String username = "user_" + faker.number().digits(10);
         String password = "password123";
 
@@ -38,6 +31,10 @@ public class AuthTest extends BaseTest {
 
     @Test(priority = 2, description = "Verify signup fails when using an existing username")
     public void testSignupWithExistingUser() {
+        HomePage homePage = new HomePage(getDriver());
+        Modals modals = new Modals(getDriver());
+        homePage.navigateTo();
+
         String username = "user_" + faker.number().digits(10); 
         String password = "password123";
 
@@ -58,6 +55,10 @@ public class AuthTest extends BaseTest {
 
     @Test(priority = 3, description = "Verify successful login")
     public void testSuccessfulLogin() {
+        HomePage homePage = new HomePage(getDriver());
+        Modals modals = new Modals(getDriver());
+        homePage.navigateTo();
+
         String username = "user_" + faker.number().digits(10);
         String password = "password123";
 
@@ -77,6 +78,10 @@ public class AuthTest extends BaseTest {
 
     @Test(description = "Verify login fails with incorrect password")
     public void testLoginWithInvalidCredentials() {
+        HomePage homePage = new HomePage(getDriver());
+        Modals modals = new Modals(getDriver());
+        homePage.navigateTo();
+
         homePage.clickLogin();
         modals.login("non_existent_user_" + faker.number().digits(10), "wrongpassword");
         String alertText = modals.getAlertTextAndAccept();
@@ -87,6 +92,10 @@ public class AuthTest extends BaseTest {
 
     @Test(priority = 4, description = "Verify successful logout")
     public void testLogout() {
+        HomePage homePage = new HomePage(getDriver());
+        Modals modals = new Modals(getDriver());
+        homePage.navigateTo();
+
         String username = "user_" + faker.number().digits(10);
         String password = "password123";
 
