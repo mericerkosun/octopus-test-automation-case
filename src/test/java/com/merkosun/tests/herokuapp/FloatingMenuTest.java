@@ -1,6 +1,7 @@
 package com.merkosun.tests.herokuapp;
 
 import com.merkosun.base.BaseTest;
+import com.merkosun.pages.herokuapp.HerokuAppConstants;
 import com.merkosun.pages.herokuapp.HerokuFloatingMenuPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -22,11 +23,11 @@ public class FloatingMenuTest extends BaseTest {
         HerokuFloatingMenuPage floatingMenuPage = new HerokuFloatingMenuPage(getDriver()).navigateTo();
 
         floatingMenuPage.clickNews();
-        Assert.assertTrue(getDriver().getCurrentUrl().contains("#news"), "Should navigate to news section");
+        Assert.assertTrue(getDriver().getCurrentUrl().contains(HerokuAppConstants.MENU_NEWS_FRAGMENT), "Should navigate to news section");
 
         floatingMenuPage.scrollToBottom();
         floatingMenuPage.clickContact();
-        Assert.assertTrue(getDriver().getCurrentUrl().contains("#contact"), "Should navigate to contact section even from bottom");
+        Assert.assertTrue(getDriver().getCurrentUrl().contains(HerokuAppConstants.MENU_CONTACT_FRAGMENT), "Should navigate to contact section even from bottom");
     }
 
     @Test

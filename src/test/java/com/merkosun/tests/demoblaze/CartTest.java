@@ -4,6 +4,7 @@ import com.merkosun.base.BaseTest;
 import com.merkosun.pages.demoblaze.CartPage;
 import com.merkosun.pages.demoblaze.HomePage;
 import com.merkosun.pages.demoblaze.ProductPage;
+import com.merkosun.pages.demoblaze.DemoBlazeConstants;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -17,8 +18,8 @@ public class CartTest extends BaseTest {
         CartPage cartPage = new CartPage(getDriver());
         homePage.navigateTo();
 
-        String p1 = "Samsung galaxy s6";
-        String p2 = "Nokia lumia 1520";
+        String p1 = DemoBlazeConstants.DEFAULT_PRODUCT_PHONE;
+        String p2 = DemoBlazeConstants.PRODUCT_NOKIA_LUMIA;
 
         homePage.filterByPhones();
         homePage.selectProductByName(p1);
@@ -45,7 +46,7 @@ public class CartTest extends BaseTest {
         homePage.navigateTo();
 
         homePage.filterByPhones();
-        homePage.selectProductByName("Samsung galaxy s6");
+        homePage.selectProductByName(DemoBlazeConstants.DEFAULT_PRODUCT_PHONE);
         productPage.addToCart();
         productPage.getAlertTextAndAccept();
         
@@ -66,7 +67,7 @@ public class CartTest extends BaseTest {
         homePage.navigateTo();
 
         homePage.filterByPhones();
-        homePage.selectProductByName("Samsung galaxy s6");
+        homePage.selectProductByName(DemoBlazeConstants.DEFAULT_PRODUCT_PHONE);
         productPage.addToCart();
         productPage.getAlertTextAndAccept();
 

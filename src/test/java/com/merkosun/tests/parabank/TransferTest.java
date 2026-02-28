@@ -4,6 +4,7 @@ import com.merkosun.base.BaseTest;
 import com.merkosun.pages.parabank.AccountOverviewPage;
 import com.merkosun.pages.parabank.LoginPage;
 import com.merkosun.pages.parabank.TransferPage;
+import com.merkosun.pages.parabank.ParabankConstants;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -14,7 +15,7 @@ import org.testng.annotations.Test;
  */
 public class TransferTest extends BaseTest {
 
-    private static final String TRANSFER_AMOUNT = "100";
+    private static final String TRANSFER_AMOUNT = ParabankConstants.TRANSFER_AMOUNT_DEFAULT;
 
     @Test(description = "Fund transfer should complete successfully")
     public void testTransferFunds() {
@@ -52,7 +53,7 @@ public class TransferTest extends BaseTest {
         overviewPage.navigateTo();
         overviewPage.clickFirstAccount();
 
-        Assert.assertTrue(overviewPage.verifyLastTransaction("Debit", TRANSFER_AMOUNT),
+        Assert.assertTrue(overviewPage.verifyLastTransaction(ParabankConstants.TRANSACTION_TYPE_DEBIT, TRANSFER_AMOUNT),
                 "Last transaction should be Debit type with correct amount");
     }
 }

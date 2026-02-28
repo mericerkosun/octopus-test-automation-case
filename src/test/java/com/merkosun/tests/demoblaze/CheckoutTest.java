@@ -5,6 +5,7 @@ import com.merkosun.pages.demoblaze.CartPage;
 import com.merkosun.pages.demoblaze.HomePage;
 import com.merkosun.pages.demoblaze.ProductPage;
 import net.datafaker.Faker;
+import com.merkosun.pages.demoblaze.DemoBlazeConstants;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -20,7 +21,7 @@ public class CheckoutTest extends BaseTest {
         homePage.navigateTo();
 
         homePage.filterByPhones();
-        homePage.selectProductByName("Samsung galaxy s6");
+        homePage.selectProductByName(DemoBlazeConstants.DEFAULT_PRODUCT_PHONE);
         productPage.addToCart();
         productPage.getAlertTextAndAccept();
 
@@ -32,8 +33,8 @@ public class CheckoutTest extends BaseTest {
                 faker.address().country(),
                 faker.address().city(),
                 faker.finance().creditCard(),
-                "12",
-                "2026"
+                DemoBlazeConstants.EXPIRY_MONTH,
+                DemoBlazeConstants.EXPIRY_YEAR
         );
 
         Assert.assertTrue(cartPage.isPurchaseSuccessful(), "Purchase should be successful!");
@@ -50,7 +51,7 @@ public class CheckoutTest extends BaseTest {
         homePage.navigateTo();
 
         homePage.filterByPhones();
-        homePage.selectProductByName("Samsung galaxy s6");
+        homePage.selectProductByName(DemoBlazeConstants.DEFAULT_PRODUCT_PHONE);
         productPage.addToCart();
         productPage.getAlertTextAndAccept();
 
@@ -60,7 +61,7 @@ public class CheckoutTest extends BaseTest {
         cartPage.fillPurchaseForm("", "", "", "", "", "");
         
         String alertText = cartPage.getAlertText();
-        Assert.assertTrue(alertText.contains("Please fill out Name and Creditcard"), "Validation message mismatch! Found: " + alertText);
+        Assert.assertTrue(alertText.contains(DemoBlazeConstants.FILL_OUT_NAME_AND_CARD), "Validation message mismatch! Found: " + alertText);
         cartPage.acceptAlert();
     }
 }

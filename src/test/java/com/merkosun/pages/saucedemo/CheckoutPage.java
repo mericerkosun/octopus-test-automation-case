@@ -48,7 +48,7 @@ public class CheckoutPage extends BasePage {
     }
 
     public String getCompleteHeaderText() {
-        waitForTextToAppear(COMPLETE_HEADER, "Checkout: Complete!");
+        waitForTextToAppear(COMPLETE_HEADER, SauceConstants.CHECKOUT_COMPLETE_HEADER);
         return getTextFromElement(COMPLETE_HEADER);
     }
 }

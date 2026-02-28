@@ -1,6 +1,7 @@
 package com.merkosun.tests.herokuapp;
 
 import com.merkosun.base.BaseTest;
+import com.merkosun.pages.herokuapp.HerokuAppConstants;
 import com.merkosun.pages.herokuapp.HerokuUploadPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -14,11 +15,11 @@ public class FileUploadTest extends BaseTest {
         HerokuUploadPage uploadPage = new HerokuUploadPage(getDriver()).navigateTo();
 
         String fileName = "testfile.txt";
-        String filePath = new File("src/test/resources/testdata/" + fileName).getAbsolutePath();
+        String filePath = new File(com.merkosun.config.ConfigManager.getInstance().testDataPath() + fileName).getAbsolutePath();
 
         uploadPage.uploadFile(filePath);
 
-        Assert.assertEquals(uploadPage.getSuccessMessage(), "File Uploaded!", "Success message mismatch");
+        Assert.assertEquals(uploadPage.getSuccessMessage(), HerokuAppConstants.FILE_UPLOADED_SUCCESS, "Success message mismatch");
         Assert.assertEquals(uploadPage.getUploadedFileName(), fileName, "Uploaded file name mismatch");
     }
 
@@ -27,11 +28,11 @@ public class FileUploadTest extends BaseTest {
         HerokuUploadPage uploadPage = new HerokuUploadPage(getDriver()).navigateTo();
 
         String fileName = "test_image.png";
-        String filePath = new File("src/test/resources/testdata/" + fileName).getAbsolutePath();
+        String filePath = new File(com.merkosun.config.ConfigManager.getInstance().testDataPath() + fileName).getAbsolutePath();
 
         uploadPage.uploadFile(filePath);
 
-        Assert.assertEquals(uploadPage.getSuccessMessage(), "File Uploaded!", "Success image upload message mismatch");
+        Assert.assertEquals(uploadPage.getSuccessMessage(), HerokuAppConstants.FILE_UPLOADED_SUCCESS, "Success image upload message mismatch");
         Assert.assertEquals(uploadPage.getUploadedFileName(), fileName, "Uploaded image name mismatch");
     }
 
@@ -40,11 +41,11 @@ public class FileUploadTest extends BaseTest {
         HerokuUploadPage uploadPage = new HerokuUploadPage(getDriver()).navigateTo();
 
         String fileName = "special!@#file.txt";
-        String filePath = new File("src/test/resources/testdata/" + fileName).getAbsolutePath();
+        String filePath = new File(com.merkosun.config.ConfigManager.getInstance().testDataPath() + fileName).getAbsolutePath();
 
         uploadPage.uploadFile(filePath);
 
-        Assert.assertEquals(uploadPage.getSuccessMessage(), "File Uploaded!", "Success special file upload message mismatch");
+        Assert.assertEquals(uploadPage.getSuccessMessage(), HerokuAppConstants.FILE_UPLOADED_SUCCESS, "Success special file upload message mismatch");
         Assert.assertEquals(uploadPage.getUploadedFileName(), fileName, "Special filename mismatch");
     }
 
@@ -54,7 +55,7 @@ public class FileUploadTest extends BaseTest {
 
         uploadPage.clickUploadWithoutFile();
         
-        Assert.assertTrue(getDriver().getPageSource().contains("Internal Server Error") || uploadPage.isDragDropAreaVisible(),
+        Assert.assertTrue(getDriver().getPageSource().contains(HerokuAppConstants.INTERNAL_SERVER_ERROR) || uploadPage.isDragDropAreaVisible(),
                 "Page should handle empty upload gracefully or show error");
     }
 

@@ -2,6 +2,7 @@ package com.merkosun.tests.parabank;
 
 import com.merkosun.base.BaseTest;
 import com.merkosun.pages.parabank.LoginPage;
+import com.merkosun.pages.parabank.ParabankConstants;
 import com.merkosun.pages.parabank.RequestLoanPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -24,11 +25,11 @@ public class RequestLoanTest extends BaseTest {
 
         RequestLoanPage loanPage = new RequestLoanPage(getDriver());
         loanPage.navigateToRequestLoan();
-        loanPage.requestLoan("1000", "100");
+        loanPage.requestLoan(ParabankConstants.LOAN_AMOUNT_REASONABLE, ParabankConstants.DOWN_PAYMENT_REASONABLE);
 
         Assert.assertTrue(loanPage.isResultVisible(),
                 "Loan request result section should be displayed");
-        Assert.assertEquals(loanPage.getLoanStatus(), "Approved",
+        Assert.assertEquals(loanPage.getLoanStatus(), ParabankConstants.LOAN_STATUS_APPROVED,
                 "Reasonable loan request should be approved");
     }
 
@@ -43,11 +44,11 @@ public class RequestLoanTest extends BaseTest {
 
         RequestLoanPage loanPage = new RequestLoanPage(getDriver());
         loanPage.navigateToRequestLoan();
-        loanPage.requestLoan("999999999", "100");
+        loanPage.requestLoan(ParabankConstants.LOAN_AMOUNT_HIGH, ParabankConstants.DOWN_PAYMENT_REASONABLE);
 
         Assert.assertTrue(loanPage.isResultVisible(),
                 "Loan request result section should be displayed");
-        Assert.assertEquals(loanPage.getLoanStatus(), "Denied",
+        Assert.assertEquals(loanPage.getLoanStatus(), ParabankConstants.LOAN_STATUS_DENIED,
                 "Extremely high loan request should be denied");
     }
 }

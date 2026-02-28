@@ -18,7 +18,8 @@ public class ShadowDomPage extends BasePage {
     }
 
     public ShadowDomPage navigateTo() {
-        driver.get(com.merkosun.config.ConfigManager.getInstance().uitapBaseUrl() + "/shadowdom");
+        driver.get(com.merkosun.config.ConfigManager.getInstance().uitapBaseUrl() + 
+                com.merkosun.config.ConfigManager.getInstance().uitapShadowPath());
         return this;
     }
 

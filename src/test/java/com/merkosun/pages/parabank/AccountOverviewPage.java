@@ -21,12 +21,12 @@ public class AccountOverviewPage extends BasePage {
     }
 
     public AccountOverviewPage navigateTo() {
-        driver.get(ConfigManager.getInstance().parabankBaseUrl() + "/overview.htm");
+        driver.get(ConfigManager.getInstance().parabankBaseUrl() + ParabankConstants.OVERVIEW_URL_PART);
         return this;
     }
 
     public boolean isPageLoaded() {
-        return waitForTextToAppear(PAGE_TITLE, "Accounts Overview");
+        return waitForTextToAppear(PAGE_TITLE, ParabankConstants.ACCOUNTS_OVERVIEW_TITLE);
     }
 
     public String getFirstAccountId() {
@@ -46,7 +46,7 @@ public class AccountOverviewPage extends BasePage {
         List<WebElement> rows = driver.findElements(TRANSACTION_ROWS);
 
 
-        int columnIndex = expectedType.equalsIgnoreCase("Debit") ? 2 : 3;
+        int columnIndex = expectedType.equalsIgnoreCase(ParabankConstants.TRANSACTION_TYPE_DEBIT) ? 2 : 3;
 
         for (WebElement row : rows) {
             List<WebElement> cells = row.findElements(By.tagName("td"));

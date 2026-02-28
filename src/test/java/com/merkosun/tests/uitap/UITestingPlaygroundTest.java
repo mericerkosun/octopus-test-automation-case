@@ -3,6 +3,7 @@ package com.merkosun.tests.uitap;
 import com.merkosun.base.BaseTest;
 import com.merkosun.pages.uitap.OverlappedElementPage;
 import com.merkosun.pages.uitap.ShadowDomPage;
+import com.merkosun.pages.uitap.UITapConstants;
 import com.merkosun.pages.uitap.UITestingPlaygroundPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -18,22 +19,24 @@ public class UITestingPlaygroundTest extends BaseTest {
 
     @Test(description = "Verify AJAX delay handled with explicit wait")
     public void testAjaxData() {
-        UITestingPlaygroundPage playgroundPage = new UITestingPlaygroundPage(getDriver()).navigateTo("/ajax");
+        UITestingPlaygroundPage playgroundPage = new UITestingPlaygroundPage(getDriver())
+                .navigateTo(com.merkosun.config.ConfigManager.getInstance().uitapAjaxPath());
         
         playgroundPage.clickAjaxButton();
         String text = playgroundPage.getAjaxContentText();
         
-        Assert.assertEquals(text, "Data loaded with AJAX get request.", "AJAX content should match expected text after delay");
+        Assert.assertEquals(text, UITapConstants.AJAX_SUCCESS_TEXT, "AJAX content should match expected text");
     }
 
     @Test(description = "Verify Client Side Delay is handled correctly")
     public void testClientSideDelay() {
-        UITestingPlaygroundPage playgroundPage = new UITestingPlaygroundPage(getDriver()).navigateTo("/clientdelay");
+        UITestingPlaygroundPage playgroundPage = new UITestingPlaygroundPage(getDriver())
+                .navigateTo(com.merkosun.config.ConfigManager.getInstance().uitapClientDelayPath());
         
         playgroundPage.clickClientSideDelayButton();
         String text = playgroundPage.getAjaxContentText();
         
-        Assert.assertEquals(text, "Data calculated on the client side.", "Client side delay content should match");
+        Assert.assertEquals(text, UITapConstants.CLIENT_DELAY_SUCCESS_TEXT, "Client side delay content should match");
     }
 
     @Test(description = "Verify interaction with Shadow DOM elements")
@@ -49,7 +52,8 @@ public class UITestingPlaygroundTest extends BaseTest {
 
     @Test(description = "Verify clicking a button with dynamic ID using stable locator")
     public void testDynamicId() {
-        UITestingPlaygroundPage playgroundPage = new UITestingPlaygroundPage(getDriver()).navigateTo("/dynamicid");
+        UITestingPlaygroundPage playgroundPage = new UITestingPlaygroundPage(getDriver())
+                .navigateTo(com.merkosun.config.ConfigManager.getInstance().uitapDynamicIdPath());
         
         playgroundPage.clickDynamicIdButton();
     }
@@ -58,7 +62,7 @@ public class UITestingPlaygroundTest extends BaseTest {
     public void testOverlappedElement() {
         OverlappedElementPage overlappedPage = new OverlappedElementPage(getDriver()).navigateTo();
         
-        String testName = "Octopus Test";
+        String testName = new net.datafaker.Faker().name().fullName();
         overlappedPage.enterName(testName);
         
         Assert.assertEquals(overlappedPage.getNameValue(), testName, "Name should be correctly entered after scroll");

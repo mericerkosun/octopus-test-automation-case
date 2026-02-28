@@ -5,6 +5,7 @@ import com.merkosun.config.ConfigManager;
 import com.merkosun.pages.saucedemo.CartPage;
 import com.merkosun.pages.saucedemo.LoginPage;
 import com.merkosun.pages.saucedemo.ProductsPage;
+import com.merkosun.pages.saucedemo.SauceConstants;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -15,10 +16,9 @@ public class CartTest extends BaseTest {
 
     @Test
     public void addedItemShouldBeListedInCartTest() {
-        ConfigManager config = ConfigManager.getInstance();
         new LoginPage(getDriver())
-                .navigateTo(config.saucedemoBaseUrl())
-                .login("standard_user", "secret_sauce");
+                .navigateTo()
+                .login(SauceConstants.STANDARD_USER, SauceConstants.SECRET_SAUCE);
         ProductsPage productsPage = new ProductsPage(getDriver());
         CartPage cartPage = new CartPage(getDriver());
 
@@ -37,10 +37,9 @@ public class CartTest extends BaseTest {
 
     @Test
     public void removedItemShouldDisappearFromCartTest() {
-        ConfigManager config = ConfigManager.getInstance();
         new LoginPage(getDriver())
-                .navigateTo(config.saucedemoBaseUrl())
-                .login("standard_user", "secret_sauce");
+                .navigateTo()
+                .login(SauceConstants.STANDARD_USER, SauceConstants.SECRET_SAUCE);
         ProductsPage productsPage = new ProductsPage(getDriver());
         CartPage cartPage = new CartPage(getDriver());
 
@@ -59,10 +58,9 @@ public class CartTest extends BaseTest {
 
     @Test
     public void continueShoppingButtonShouldRedirectToProductsPageTest() {
-        ConfigManager config = ConfigManager.getInstance();
         new LoginPage(getDriver())
-                .navigateTo(config.saucedemoBaseUrl())
-                .login("standard_user", "secret_sauce");
+                .navigateTo()
+                .login(SauceConstants.STANDARD_USER, SauceConstants.SECRET_SAUCE);
         ProductsPage productsPage = new ProductsPage(getDriver());
         CartPage cartPage = new CartPage(getDriver());
 
@@ -71,7 +69,7 @@ public class CartTest extends BaseTest {
 
         String currentUrl = getDriver().getCurrentUrl();
         Assert.assertNotNull(currentUrl, "Current URL is null");
-        Assert.assertTrue(currentUrl.contains("inventory.html"),
+        Assert.assertTrue(currentUrl.contains(SauceConstants.INVENTORY_URL_PART),
                 "Continue Shopping button should redirect to Products page");
 
     }
@@ -79,10 +77,9 @@ public class CartTest extends BaseTest {
 
     @Test
     public void emptyCartCheckoutShouldNavigateToCheckoutStepOneTest() {
-        ConfigManager config = ConfigManager.getInstance();
         new LoginPage(getDriver())
-                .navigateTo(config.saucedemoBaseUrl())
-                .login("standard_user", "secret_sauce");
+                .navigateTo()
+                .login(SauceConstants.STANDARD_USER, SauceConstants.SECRET_SAUCE);
         ProductsPage productsPage = new ProductsPage(getDriver());
         CartPage cartPage = new CartPage(getDriver());
 
@@ -94,7 +91,7 @@ public class CartTest extends BaseTest {
 
         String currentUrl = getDriver().getCurrentUrl();
         Assert.assertNotNull(currentUrl, "Current URL is null");
-        Assert.assertTrue(currentUrl.contains("checkout-step-one.html"),
+        Assert.assertTrue(currentUrl.contains(SauceConstants.CHECKOUT_STEP_ONE_URL_PART),
                 "Checkout button did not navigate to Checkout Step One page");
 
     }

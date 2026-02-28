@@ -16,8 +16,8 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-    public LoginPage navigateTo(String url) {
-        driver.get(url);
+    public LoginPage navigateTo() {
+        driver.get(com.merkosun.config.ConfigManager.getInstance().saucedemoBaseUrl());
         return this;
     }
 
@@ -26,6 +26,7 @@ public class LoginPage extends BasePage {
         typeToElement(PASSWORD_INPUT, password);
         clickToElement(LOGIN_BUTTON);
     }
+
 
     public String getErrorMessage() {
         return getTextFromElement(ERROR_MESSAGE);

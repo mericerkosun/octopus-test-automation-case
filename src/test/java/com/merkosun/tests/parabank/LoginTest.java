@@ -2,6 +2,7 @@ package com.merkosun.tests.parabank;
 
 import com.merkosun.base.BaseTest;
 import com.merkosun.pages.parabank.LoginPage;
+import com.merkosun.pages.parabank.ParabankConstants;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

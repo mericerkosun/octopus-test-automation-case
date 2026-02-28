@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 
 public class BillPayPage extends BasePage {
 
-    private static final By BILL_PAY_LINK    = By.linkText("Bill Pay");
+    private static final By BILL_PAY_LINK    = By.linkText(ParabankConstants.BILL_PAY_LINK_TEXT);
     private static final By PAYEE_NAME       = By.name("payee.name");
     private static final By ADDRESS          = By.name("payee.address.street");
     private static final By CITY             = By.name("payee.address.city");
@@ -47,6 +47,6 @@ public class BillPayPage extends BasePage {
 
     public boolean isBillPaid() {
         return isElementVisible(SUCCESS_TITLE) &&
-               waitForTextToAppear(SUCCESS_TITLE, "Bill Payment Complete");
+               waitForTextToAppear(SUCCESS_TITLE, ParabankConstants.BILL_PAY_SUCCESS_TEXT);
     }
 }

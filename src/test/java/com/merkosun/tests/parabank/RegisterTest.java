@@ -2,6 +2,7 @@ package com.merkosun.tests.parabank;
 
 import com.merkosun.base.BaseTest;
 import com.merkosun.model.UserData;
+import com.merkosun.pages.parabank.ParabankConstants;
 import com.merkosun.pages.parabank.RegisterPage;
 import net.datafaker.Faker;
 import org.testng.Assert;
@@ -28,7 +29,7 @@ public class RegisterTest extends BaseTest {
                 .phone(faker.phoneNumber().subscriberNumber(10))
                 .ssn(faker.idNumber().ssnValid())
                 .username(faker.internet().username() + faker.number().digits(4))
-                .password("Test@1234")
+                .password(ParabankConstants.DEFAULT_PASSWORD)
                 .build();
 
         RegisterPage registerPage = new RegisterPage(getDriver());
@@ -36,23 +37,23 @@ public class RegisterTest extends BaseTest {
         registerPage.register(user);
 
         Assert.assertTrue(registerPage.isRegistrationSuccessful(),
-                "Registration success message (Welcome) should be displayed");
+                ParabankConstants.WELCOME_TEXT + " message should be displayed");
     }
 
     @Test(description = "Registering with an existing username should show an error message")
     public void testDuplicateUsernameRegistration() {
-
+        String existingUsername = com.merkosun.config.ConfigManager.getInstance().parabankDuplicateUsername();
         UserData user = new UserData.Builder()
-                .firstName("John")
-                .lastName("Doe")
-                .address("123 Main St")
-                .city("Springfield")
-                .state("IL")
-                .zipCode("62701")
-                .phone("5551234567")
-                .ssn("123-45-6789")
-                .username("john")
-                .password("demo")
+                .firstName(ParabankConstants.DEFAULT_FIRST_NAME)
+                .lastName(ParabankConstants.DEFAULT_LAST_NAME)
+                .address(ParabankConstants.DEFAULT_ADDRESS)
+                .city(ParabankConstants.DEFAULT_CITY)
+                .state(ParabankConstants.DEFAULT_STATE)
+                .zipCode(ParabankConstants.DEFAULT_ZIP)
+                .phone(ParabankConstants.DEFAULT_PHONE)
+                .ssn(ParabankConstants.DEFAULT_SSN)
+                .username(existingUsername)
+                .password(ParabankConstants.DEFAULT_PASSWORD)
                 .build();
 
         RegisterPage registerPage = new RegisterPage(getDriver());

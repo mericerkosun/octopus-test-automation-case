@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class TransferPage extends BasePage {
 
-    private static final By TRANSFER_LINK       = By.linkText("Transfer Funds");
+    private static final By TRANSFER_LINK       = By.linkText(ParabankConstants.TRANSFER_FUNDS_LINK_TEXT);
     private static final By AMOUNT_INPUT        = By.id("amount");
     private static final By FROM_ACCOUNT        = By.id("fromAccountId");
     private static final By TO_ACCOUNT          = By.id("toAccountId");

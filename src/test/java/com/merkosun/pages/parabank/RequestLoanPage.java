@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 
 public class RequestLoanPage extends BasePage {
 
-    private static final By REQUEST_LOAN_LINK = By.linkText("Request Loan");
+    private static final By REQUEST_LOAN_LINK = By.linkText(ParabankConstants.REQUEST_LOAN_LINK_TEXT);
     private static final By LOAN_AMOUNT       = By.id("amount");
     private static final By DOWN_PAYMENT      = By.id("downPayment");
     private static final By FROM_ACCOUNT      = By.id("fromAccountId");

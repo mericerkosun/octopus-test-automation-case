@@ -2,6 +2,7 @@ package com.merkosun.tests.parabank;
 
 import com.merkosun.base.BaseTest;
 import com.merkosun.pages.parabank.LoginPage;
+import com.merkosun.pages.parabank.ParabankConstants;
 import com.merkosun.pages.parabank.OpenNewAccountPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -25,7 +26,7 @@ public class OpenNewAccountTest extends BaseTest {
 
         OpenNewAccountPage openNewAccountPage = new OpenNewAccountPage(getDriver());
         openNewAccountPage.navigateToOpenAccount();
-        openNewAccountPage.openAccount("CHECKING");
+        openNewAccountPage.openAccount(ParabankConstants.ACCOUNT_TYPE_CHECKING);
 
         Assert.assertTrue(openNewAccountPage.isNewAccountCreated(),
                 "New Checking account ID should be displayed");
@@ -45,7 +46,7 @@ public class OpenNewAccountTest extends BaseTest {
 
         OpenNewAccountPage openNewAccountPage = new OpenNewAccountPage(getDriver());
         openNewAccountPage.navigateToOpenAccount();
-        openNewAccountPage.openAccount("SAVINGS");
+        openNewAccountPage.openAccount(ParabankConstants.ACCOUNT_TYPE_SAVINGS);
 
         Assert.assertTrue(openNewAccountPage.isNewAccountCreated(),
                 "New Savings account ID should be displayed");

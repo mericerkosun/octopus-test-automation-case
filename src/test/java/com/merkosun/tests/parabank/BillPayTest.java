@@ -4,6 +4,7 @@ import com.merkosun.base.BaseTest;
 import com.merkosun.model.BillData;
 import com.merkosun.pages.parabank.BillPayPage;
 import com.merkosun.pages.parabank.LoginPage;
+import com.merkosun.pages.parabank.ParabankConstants;
 import net.datafaker.Faker;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -33,8 +34,8 @@ public class BillPayTest extends BaseTest {
                 .state(faker.address().stateAbbr())
                 .zipCode(faker.address().zipCode().substring(0, 5))
                 .phone(faker.phoneNumber().subscriberNumber(10))
-                .account("12345")
-                .amount("50")
+                .account(ParabankConstants.BILL_ACCOUNT_DEFAULT)
+                .amount(ParabankConstants.BILL_AMOUNT_DEFAULT)
                 .build();
 
         BillPayPage billPayPage = new BillPayPage(getDriver());
@@ -42,7 +43,7 @@ public class BillPayTest extends BaseTest {
         billPayPage.payBill(bill);
 
         Assert.assertTrue(billPayPage.isBillPaid(),
-                "'Bill Payment Complete' title should be displayed");
+                ParabankConstants.BILL_PAY_SUCCESS_TEXT + " title should be displayed");
     }
 
     @Test(description = "Bill payment with empty payee name should show a validation error")
@@ -61,8 +62,8 @@ public class BillPayTest extends BaseTest {
                 .state(faker.address().stateAbbr())
                 .zipCode(faker.address().zipCode().substring(0, 5))
                 .phone(faker.phoneNumber().subscriberNumber(10))
-                .account("12345")
-                .amount("50")
+                .account(ParabankConstants.BILL_ACCOUNT_DEFAULT)
+                .amount(ParabankConstants.BILL_AMOUNT_DEFAULT)
                 .build();
 
         BillPayPage billPayPage = new BillPayPage(getDriver());

@@ -28,7 +28,7 @@ public class RegisterPage extends BasePage {
     }
 
     public RegisterPage navigateTo() {
-        driver.get(ConfigManager.getInstance().parabankBaseUrl() + "/register.htm");
+        driver.get(ConfigManager.getInstance().parabankBaseUrl() + ParabankConstants.REGISTER_URL_PART);
         return this;
     }
 
@@ -48,7 +48,7 @@ public class RegisterPage extends BasePage {
     }
 
     public boolean isRegistrationSuccessful() {
-        return waitForTextToAppear(SUCCESS_MESSAGE, "Welcome");
+        return waitForTextToAppear(SUCCESS_MESSAGE, ParabankConstants.WELCOME_TEXT);
     }
 
     public boolean isErrorMessageVisible() {

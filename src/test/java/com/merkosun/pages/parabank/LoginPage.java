@@ -29,7 +29,7 @@ public class LoginPage extends BasePage {
     }
 
     public boolean isLoginSuccessful() {
-        return waitForUrlContains("overview.htm");
+        return waitForUrlContains(ParabankConstants.OVERVIEW_URL_PART);
     }
 
     public boolean isErrorMessageVisible() {

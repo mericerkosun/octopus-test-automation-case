@@ -3,6 +3,7 @@ package com.merkosun.tests.demoblaze;
 import com.merkosun.base.BaseTest;
 import com.merkosun.pages.demoblaze.HomePage;
 import com.merkosun.pages.demoblaze.ProductPage;
+import com.merkosun.pages.demoblaze.DemoBlazeConstants;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -37,13 +38,13 @@ public class ProductTest extends BaseTest {
         ProductPage productPage = new ProductPage(getDriver());
         homePage.navigateTo();
 
-        String expectedProductName = "Samsung galaxy s6";
+        String expectedProductName = DemoBlazeConstants.DEFAULT_PRODUCT_PHONE;
         
         homePage.filterByPhones();
         homePage.selectProductByName(expectedProductName);
  
         Assert.assertEquals(productPage.getProductName(), expectedProductName, "Product name mismatch in detail page!");
-        Assert.assertTrue(productPage.getProductPrice().contains("$360"), "Product price mismatch!");
+        Assert.assertTrue(productPage.getProductPrice().contains(DemoBlazeConstants.PRODUCT_S6_PRICE), "Product price mismatch!");
         Assert.assertFalse(productPage.getProductDescription().isEmpty(), "Product description should not be empty!");
     }
 }

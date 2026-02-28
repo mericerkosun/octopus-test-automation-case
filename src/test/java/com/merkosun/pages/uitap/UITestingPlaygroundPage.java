@@ -34,7 +34,8 @@ public class UITestingPlaygroundPage extends BasePage {
     }
 
     public String getAjaxContentText() {
-        // Higher timeout for AJAX/Client Side Delay as per scenario (15s+)
-        return getTextFromElement(ajaxContent, java.time.Duration.ofSeconds(20));
+        // Use long wait from config for AJAX/Client Side Delay scenarios
+        return getTextFromElement(ajaxContent, java.time.Duration.ofSeconds(
+                com.merkosun.config.ConfigManager.getInstance().uitapLongWait()));
     }
 }

@@ -15,7 +15,8 @@ public class OverlappedElementPage extends BasePage {
     }
 
     public OverlappedElementPage navigateTo() {
-        driver.get(com.merkosun.config.ConfigManager.getInstance().uitapBaseUrl() + "/overlapped");
+        driver.get(com.merkosun.config.ConfigManager.getInstance().uitapBaseUrl() + 
+                com.merkosun.config.ConfigManager.getInstance().uitapOverlappedPath());
         return this;
     }
 
