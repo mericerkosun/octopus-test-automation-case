@@ -51,6 +51,12 @@ public abstract class BasePage {
         return element.getText();
     }
 
+    protected String getTextFromElement(By locator, Duration timeout) {
+        WebDriverWait customWait = new WebDriverWait(driver, timeout);
+        WebElement element = customWait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        return element.getText();
+    }
+
     protected boolean isElementVisible(By locator) {
         try {
             return wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).isDisplayed();
@@ -150,6 +156,24 @@ public abstract class BasePage {
     protected void uploadFileToElement(By locator, String absolutePath) {
         WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
         element.sendKeys(absolutePath);
+    }
+
+    protected void scrollIntoView(By locator) {
+        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        executeJavaScript("arguments[0].scrollIntoView({block: 'center'});", element);
+    }
+
+    protected org.openqa.selenium.SearchContext getShadowRoot(By shadowHost) {
+        WebElement host = wait.until(ExpectedConditions.presenceOfElementLocated(shadowHost));
+        return host.getShadowRoot();
+    }
+
+    protected void clickToShadowElement(By shadowHost, By locator) {
+        getShadowRoot(shadowHost).findElement(locator).click();
+    }
+
+    protected String getShadowElementAttribute(By shadowHost, By locator, String attribute) {
+        return getShadowRoot(shadowHost).findElement(locator).getAttribute(attribute);
     }
 
 }

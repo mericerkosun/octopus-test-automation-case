@@ -17,20 +17,20 @@ public class ShadowDomPage extends BasePage {
         super(driver);
     }
 
-    private SearchContext getShadowRoot() {
-        WebElement host = wait.until(org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated(shadowHost));
-        return host.getShadowRoot();
+    public ShadowDomPage navigateTo() {
+        driver.get(com.merkosun.config.ConfigManager.getInstance().uitapBaseUrl() + "/shadowdom");
+        return this;
     }
 
     public void clickGenerate() {
-        getShadowRoot().findElement(generateButton).click();
+        clickToShadowElement(shadowHost, generateButton);
     }
 
     public void clickCopy() {
-        getShadowRoot().findElement(copyButton).click();
+        clickToShadowElement(shadowHost, copyButton);
     }
 
     public String getGuidValue() {
-        return getShadowRoot().findElement(editField).getAttribute("value");
+        return getShadowElementAttribute(shadowHost, editField, "value");
     }
 }

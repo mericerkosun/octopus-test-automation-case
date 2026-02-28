@@ -10,10 +10,15 @@ public class UITestingPlaygroundPage extends BasePage {
     private final By ajaxDataButton = By.id("ajaxButton");
     private final By dynamicIdButton = By.xpath("//button[text()='Button with Dynamic ID']");
     private final By ajaxContent = By.className("bg-success");
-    private final By clientSideDelayButton = By.id("ajaxButton"); // Same ID as AJAX but on a different page/context
+    private final By clientSideDelayButton = By.id("ajaxButton"); 
 
     public UITestingPlaygroundPage(WebDriver driver) {
         super(driver);
+    }
+
+    public UITestingPlaygroundPage navigateTo(String path) {
+        driver.get(com.merkosun.config.ConfigManager.getInstance().uitapBaseUrl() + path);
+        return this;
     }
 
     public void clickAjaxButton() {
@@ -30,7 +35,6 @@ public class UITestingPlaygroundPage extends BasePage {
 
     public String getAjaxContentText() {
         // Higher timeout for AJAX/Client Side Delay as per scenario (15s+)
-        org.openqa.selenium.support.ui.WebDriverWait longWait = new org.openqa.selenium.support.ui.WebDriverWait(driver, java.time.Duration.ofSeconds(20));
-        return longWait.until(org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated(ajaxContent)).getText();
+        return getTextFromElement(ajaxContent, java.time.Duration.ofSeconds(20));
     }
 }

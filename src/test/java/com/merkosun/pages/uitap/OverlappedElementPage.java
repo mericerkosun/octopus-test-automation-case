@@ -14,11 +14,13 @@ public class OverlappedElementPage extends BasePage {
         super(driver);
     }
 
+    public OverlappedElementPage navigateTo() {
+        driver.get(com.merkosun.config.ConfigManager.getInstance().uitapBaseUrl() + "/overlapped");
+        return this;
+    }
+
     public void enterName(String name) {
-        WebElement input = wait.until(org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated(nameInput));
-        // Step 1: Scroll into view to ensure it's not overlapped by the absolute div
-        executeJavaScript("arguments[0].scrollIntoView({block: 'center'});", input);
-        // Step 2: Use typeToElement from BasePage
+        scrollIntoView(nameInput);
         typeToElement(nameInput, name);
     }
 

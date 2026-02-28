@@ -18,8 +18,7 @@ public class UITestingPlaygroundTest extends BaseTest {
 
     @Test(description = "Verify AJAX delay handled with explicit wait")
     public void testAjaxData() {
-        getDriver().get(BASE_URL + "/ajax");
-        UITestingPlaygroundPage playgroundPage = new UITestingPlaygroundPage(getDriver());
+        UITestingPlaygroundPage playgroundPage = new UITestingPlaygroundPage(getDriver()).navigateTo("/ajax");
         
         playgroundPage.clickAjaxButton();
         String text = playgroundPage.getAjaxContentText();
@@ -29,8 +28,7 @@ public class UITestingPlaygroundTest extends BaseTest {
 
     @Test(description = "Verify Client Side Delay is handled correctly")
     public void testClientSideDelay() {
-        getDriver().get(BASE_URL + "/clientdelay");
-        UITestingPlaygroundPage playgroundPage = new UITestingPlaygroundPage(getDriver());
+        UITestingPlaygroundPage playgroundPage = new UITestingPlaygroundPage(getDriver()).navigateTo("/clientdelay");
         
         playgroundPage.clickClientSideDelayButton();
         String text = playgroundPage.getAjaxContentText();
@@ -40,8 +38,7 @@ public class UITestingPlaygroundTest extends BaseTest {
 
     @Test(description = "Verify interaction with Shadow DOM elements")
     public void testShadowDom() throws IOException, UnsupportedFlavorException {
-        getDriver().get(BASE_URL + "/shadowdom");
-        ShadowDomPage shadowPage = new ShadowDomPage(getDriver());
+        ShadowDomPage shadowPage = new ShadowDomPage(getDriver()).navigateTo();
         
         shadowPage.clickGenerate();
         String guid = shadowPage.getGuidValue();
@@ -52,16 +49,14 @@ public class UITestingPlaygroundTest extends BaseTest {
 
     @Test(description = "Verify clicking a button with dynamic ID using stable locator")
     public void testDynamicId() {
-        getDriver().get(BASE_URL + "/dynamicid");
-        UITestingPlaygroundPage playgroundPage = new UITestingPlaygroundPage(getDriver());
+        UITestingPlaygroundPage playgroundPage = new UITestingPlaygroundPage(getDriver()).navigateTo("/dynamicid");
         
         playgroundPage.clickDynamicIdButton();
     }
 
     @Test(description = "Verify entering text in an overlapped element after scrolling")
     public void testOverlappedElement() {
-        getDriver().get(BASE_URL + "/overlapped");
-        OverlappedElementPage overlappedPage = new OverlappedElementPage(getDriver());
+        OverlappedElementPage overlappedPage = new OverlappedElementPage(getDriver()).navigateTo();
         
         String testName = "Octopus Test";
         overlappedPage.enterName(testName);
