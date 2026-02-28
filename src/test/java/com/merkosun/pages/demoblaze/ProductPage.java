@@ -30,9 +30,4 @@ public class ProductPage extends Navbar {
         clickToElement(ADD_TO_CART_BUTTON);
     }
 
-    public String getAlertTextAndAccept() {
-        String text = getAlertText();
-        acceptAlert();
-        return text;
-    }
 }

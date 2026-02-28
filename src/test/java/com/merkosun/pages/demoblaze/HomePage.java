@@ -22,12 +22,9 @@ public class HomePage extends Navbar {
     private void waitForProductsToRefresh() {
         List<WebElement> currentProducts = driver.findElements(PRODUCT_NAMES);
         if (!currentProducts.isEmpty()) {
-            try {
-                new org.openqa.selenium.support.ui.WebDriverWait(driver, java.time.Duration.ofMillis(1000))
-                        .until(ExpectedConditions.stalenessOf(currentProducts.get(0)));
-            } catch (Exception ignored) {}
+            waitForStaleness(currentProducts.get(0));
         }
-        wait.until(ExpectedConditions.visibilityOfElementLocated(PRODUCT_CARDS));
+        isElementVisible(PRODUCT_CARDS);
     }
 
     public void filterByPhones() {
@@ -51,7 +48,7 @@ public class HomePage extends Navbar {
     }
 
     public List<WebElement> getProductElements() {
-        return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(PRODUCT_NAMES));
+        return waitForElementsVisible(PRODUCT_NAMES);
     }
 
     public boolean isProductVisible(String productName) {

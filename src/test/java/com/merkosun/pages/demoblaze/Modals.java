@@ -33,21 +33,21 @@ public class Modals extends BasePage {
     }
 
     public void register(String username, String password) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(SIGNUP_MODAL_CONTENT));
+        isElementVisible(SIGNUP_MODAL_CONTENT);
         typeToElement(SIGNUP_USERNAME, username);
         typeToElement(SIGNUP_PASSWORD, password);
         clickToElement(SIGNUP_BUTTON);
     }
 
     public void login(String username, String password) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_MODAL_CONTENT));
+        isElementVisible(LOGIN_MODAL_CONTENT);
         typeToElement(LOGIN_USERNAME, username);
         typeToElement(LOGIN_PASSWORD, password);
         clickToElement(LOGIN_BUTTON);
     }
 
     public void sendContact(String email, String name, String message) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(CONTACT_MODAL_CONTENT));
+        isElementVisible(CONTACT_MODAL_CONTENT);
         typeToElement(CONTACT_EMAIL, email);
         typeToElement(CONTACT_NAME, name);
         typeToElement(CONTACT_MESSAGE, message);
@@ -67,18 +67,13 @@ public class Modals extends BasePage {
     }
 
     public void waitForSignupModalToClose() {
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(SIGNUP_MODAL_CONTENT));
+        isElementNotVisible(SIGNUP_MODAL_CONTENT);
         waitForModalBackdropToDisappear();
     }
 
     public void waitForLoginModalToClose() {
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(LOGIN_MODAL_CONTENT));
+        isElementNotVisible(LOGIN_MODAL_CONTENT);
         waitForModalBackdropToDisappear();
     }
 
-    public String getAlertTextAndAccept() {
-        String text = getAlertText();
-        acceptAlert();
-        return text;
-    }
 }

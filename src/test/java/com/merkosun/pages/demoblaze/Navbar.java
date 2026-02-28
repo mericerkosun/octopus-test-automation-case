@@ -66,13 +66,7 @@ public class Navbar extends BasePage {
     }
 
     public String getWelcomeMessage() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(WELCOME_USER));
-        
-        wait.until(d -> {
-            String text = d.findElement(WELCOME_USER).getText();
-            return text != null && text.contains("Welcome");
-        });
-        
+        waitForTextToAppear(WELCOME_USER, "Welcome");
         return getTextFromElement(WELCOME_USER);
     }
 }

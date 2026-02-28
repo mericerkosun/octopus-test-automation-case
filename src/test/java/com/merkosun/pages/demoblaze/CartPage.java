@@ -31,8 +31,7 @@ public class CartPage extends Navbar {
 
     public int getCartItemCount() {
         try {
-            List<WebElement> items = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(CART_ITEMS));
-            return items.size();
+            return waitForElementsVisible(CART_ITEMS).size();
         } catch (Exception e) {
             return 0;
         }
@@ -42,10 +41,7 @@ public class CartPage extends Navbar {
         List<WebElement> itemsBefore = driver.findElements(CART_ITEMS);
         clickToElement(DELETE_BUTTONS);
         if (!itemsBefore.isEmpty()) {
-            try {
-                new org.openqa.selenium.support.ui.WebDriverWait(driver, java.time.Duration.ofSeconds(3))
-                        .until(ExpectedConditions.stalenessOf(itemsBefore.get(0)));
-            } catch (Exception ignored) {}
+            waitForStaleness(itemsBefore.get(0));
         }
     }
 
