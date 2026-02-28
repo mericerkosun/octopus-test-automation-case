@@ -16,11 +16,23 @@ public class DriverManager {
     public static WebDriver getDriver() {
         if (driverThreadLocal.get() == null) {
             ChromeOptions options = new ChromeOptions();
-            options.addArguments("--start-maximized");
             options.addArguments("--disable-notifications");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
 
-            if (Boolean.parseBoolean(System.getProperty("headless", "false"))) {
+            String headlessProp = System.getProperty("headless");
+            String headlessEnv = System.getenv("headless");
+            boolean isHeadless = Boolean.parseBoolean(headlessProp) || Boolean.parseBoolean(headlessEnv);
+
+            if (isHeadless) {
                 options.addArguments("--headless=new");
+                options.addArguments("--window-size=1920,1080");
+                options.addArguments("--disable-gpu");
+            }
+
+            String chromeBin = System.getenv("CHROME_BIN");
+            if (chromeBin != null && !chromeBin.isEmpty()) {
+                options.setBinary(chromeBin);
             }
 
             WebDriver driver = new ChromeDriver(options);

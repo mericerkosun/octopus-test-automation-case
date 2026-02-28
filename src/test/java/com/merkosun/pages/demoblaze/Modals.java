@@ -20,9 +20,9 @@ public class Modals extends BasePage {
     private static final By CONTACT_MESSAGE = By.id("message-text");
     private static final By SEND_MESSAGE_BUTTON = By.xpath("//button[text()='Send message']");
 
-    private static final By SIGNUP_CLOSE_BUTTON = By.xpath("//div[@id='signInModal']//button[text()='Close']");
-    private static final By LOGIN_CLOSE_BUTTON = By.xpath("//div[@id='logInModal']//button[text()='Close']");
-    private static final By CONTACT_CLOSE_BUTTON = By.xpath("//div[@id='exampleModal']//button[text()='Close']");
+    private static final By SIGNUP_CLOSE_BUTTON = By.cssSelector("#signInModal .btn-secondary");
+    private static final By LOGIN_CLOSE_BUTTON = By.cssSelector("#logInModal .btn-secondary");
+    private static final By CONTACT_CLOSE_BUTTON = By.cssSelector("#exampleModal .btn-secondary");
 
     private static final By SIGNUP_MODAL_CONTENT = By.xpath("//div[@id='signInModal']//div[@class='modal-content']");
     private static final By LOGIN_MODAL_CONTENT = By.xpath("//div[@id='logInModal']//div[@class='modal-content']");
