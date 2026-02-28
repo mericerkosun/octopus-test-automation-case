@@ -6,5 +6,6 @@
         <suite-file path="src/test/resources/testng-demoblaze.xml"/>
         <suite-file path="src/test/resources/testng-saucedemo.xml"/>
         <suite-file path="src/test/resources/testng-herokuapp.xml"/>
+        <suite-file path="src/test/resources/testng-uitap.xml"/>
     </suite-files>
 </suite>

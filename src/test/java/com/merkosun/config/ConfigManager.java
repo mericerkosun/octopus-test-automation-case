@@ -36,6 +36,9 @@ public interface ConfigManager extends Config {
     @Key("demoblaze.base.url")
     String demoblazeBaseUrl();
 
+    @Key("uitap.base.url")
+    String uitapBaseUrl();
+
     static ConfigManager getInstance() {
         return ConfigFactory.create(ConfigManager.class);
     }
