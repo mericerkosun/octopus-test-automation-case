@@ -24,8 +24,20 @@ public abstract class BasePage {
     }
 
     protected void clickToElement(By locator) {
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
-        element.click();
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
+        } catch (org.openqa.selenium.ElementClickInterceptedException e) {
+            waitForModalBackdropToDisappear();
+            wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
+        }
+    }
+
+    public void waitForModalBackdropToDisappear() {
+        try {
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("modal-backdrop")));
+        } catch (Exception ignored) {
+            // If backdrop is not present, we can proceed
+        }
     }
 
     protected void typeToElement(By locator, String text) {
@@ -80,6 +92,21 @@ public abstract class BasePage {
         } catch (Exception e) {
             // Ignore if not present or clickable
         }
+    }
+
+    public void acceptAlert() {
+        wait.until(ExpectedConditions.alertIsPresent());
+        driver.switchTo().alert().accept();
+    }
+
+    public String getAlertText() {
+        wait.until(ExpectedConditions.alertIsPresent());
+        return driver.switchTo().alert().getText();
+    }
+
+    public void dismissAlert() {
+        wait.until(ExpectedConditions.alertIsPresent());
+        driver.switchTo().alert().dismiss();
     }
 
 }
