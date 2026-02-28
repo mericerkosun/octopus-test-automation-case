@@ -1,0 +1,9 @@
+services:
+  test-automation:
+    build: .
+    container_name: octopus-tests
+    environment:
+      - headless=true
+    volumes:
+      - ./allure-results:/app/target/allure-results
+    command: mvn test -Dheadless=true
