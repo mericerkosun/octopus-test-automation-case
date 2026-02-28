@@ -21,7 +21,7 @@ public class BillPayTest extends BaseTest {
     public void testBillPayment() {
         com.merkosun.model.UserData user = registerUniqueUser();
 
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         loginPage.navigateTo();
         loginPage.login(user.getUsername(), user.getPassword());
         Assert.assertTrue(loginPage.isLoginSuccessful(), "Login should be successful");
@@ -37,7 +37,7 @@ public class BillPayTest extends BaseTest {
                 .amount("50")
                 .build();
 
-        BillPayPage billPayPage = new BillPayPage(driver);
+        BillPayPage billPayPage = new BillPayPage(getDriver());
         billPayPage.navigateToBillPay();
         billPayPage.payBill(bill);
 
@@ -49,7 +49,7 @@ public class BillPayTest extends BaseTest {
     public void testBillPaymentWithEmptyPayeeName() {
         com.merkosun.model.UserData user = registerUniqueUser();
 
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         loginPage.navigateTo();
         loginPage.login(user.getUsername(), user.getPassword());
         Assert.assertTrue(loginPage.isLoginSuccessful(), "Login should be successful");
@@ -65,7 +65,7 @@ public class BillPayTest extends BaseTest {
                 .amount("50")
                 .build();
 
-        BillPayPage billPayPage = new BillPayPage(driver);
+        BillPayPage billPayPage = new BillPayPage(getDriver());
         billPayPage.navigateToBillPay();
         billPayPage.payBill(emptyPayee);
 

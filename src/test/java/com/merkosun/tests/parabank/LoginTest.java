@@ -21,7 +21,7 @@ public class LoginTest extends BaseTest {
     public void testLoginWithValidCredentials() {
         com.merkosun.model.UserData user = registerUniqueUser();
 
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         loginPage.navigateTo();
         loginPage.login(user.getUsername(), user.getPassword());
 
@@ -31,7 +31,7 @@ public class LoginTest extends BaseTest {
 
     @Test(description = "Login with empty credentials should show an error message")
     public void testLoginWithEmptyCredentials() {
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         loginPage.navigateTo();
         loginPage.login("", "");
 

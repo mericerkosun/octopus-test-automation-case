@@ -18,12 +18,12 @@ public class OpenNewAccountTest extends BaseTest {
     public void testOpenNewCheckingAccount() {
         com.merkosun.model.UserData user = registerUniqueUser();
 
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         loginPage.navigateTo();
         loginPage.login(user.getUsername(), user.getPassword());
         Assert.assertTrue(loginPage.isLoginSuccessful(), "Login should be successful");
 
-        OpenNewAccountPage openNewAccountPage = new OpenNewAccountPage(driver);
+        OpenNewAccountPage openNewAccountPage = new OpenNewAccountPage(getDriver());
         openNewAccountPage.navigateToOpenAccount();
         openNewAccountPage.openAccount("CHECKING");
 
@@ -38,12 +38,12 @@ public class OpenNewAccountTest extends BaseTest {
     public void testOpenNewSavingsAccount() {
         com.merkosun.model.UserData user = registerUniqueUser();
 
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         loginPage.navigateTo();
         loginPage.login(user.getUsername(), user.getPassword());
         Assert.assertTrue(loginPage.isLoginSuccessful(), "Login should be successful");
 
-        OpenNewAccountPage openNewAccountPage = new OpenNewAccountPage(driver);
+        OpenNewAccountPage openNewAccountPage = new OpenNewAccountPage(getDriver());
         openNewAccountPage.navigateToOpenAccount();
         openNewAccountPage.openAccount("SAVINGS");
 
@@ -58,15 +58,14 @@ public class OpenNewAccountTest extends BaseTest {
     public void testNewAccountIdNotVisibleBeforeSubmit() {
         com.merkosun.model.UserData user = registerUniqueUser();
 
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         loginPage.navigateTo();
         loginPage.login(user.getUsername(), user.getPassword());
         Assert.assertTrue(loginPage.isLoginSuccessful(), "Login should be successful");
 
-        OpenNewAccountPage openNewAccountPage = new OpenNewAccountPage(driver);
+        OpenNewAccountPage openNewAccountPage = new OpenNewAccountPage(getDriver());
         openNewAccountPage.navigateToOpenAccount();
 
-        // Formu göndermeden önce newAccountId görünmemeli
         Assert.assertTrue(openNewAccountPage.isNewAccountNotVisible(),
                 "New account ID should NOT be visible before the form is submitted");
     }

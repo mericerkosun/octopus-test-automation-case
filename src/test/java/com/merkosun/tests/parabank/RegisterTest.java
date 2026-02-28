@@ -31,7 +31,7 @@ public class RegisterTest extends BaseTest {
                 .password("Test@1234")
                 .build();
 
-        RegisterPage registerPage = new RegisterPage(driver);
+        RegisterPage registerPage = new RegisterPage(getDriver());
         registerPage.navigateTo();
         registerPage.register(user);
 
@@ -55,7 +55,7 @@ public class RegisterTest extends BaseTest {
                 .password("demo")
                 .build();
 
-        RegisterPage registerPage = new RegisterPage(driver);
+        RegisterPage registerPage = new RegisterPage(getDriver());
         registerPage.navigateTo();
         registerPage.register(user);
 

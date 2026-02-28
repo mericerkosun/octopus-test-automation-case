@@ -20,12 +20,12 @@ public class TransferTest extends BaseTest {
     public void testTransferFunds() {
         com.merkosun.model.UserData user = registerUniqueUser();
 
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         loginPage.navigateTo();
         loginPage.login(user.getUsername(), user.getPassword());
         Assert.assertTrue(loginPage.isLoginSuccessful(), "Login should be successful");
 
-        TransferPage transferPage = new TransferPage(driver);
+        TransferPage transferPage = new TransferPage(getDriver());
         transferPage.navigateToTransferFunds();
         transferPage.transferFunds(TRANSFER_AMOUNT);
 
@@ -37,20 +37,18 @@ public class TransferTest extends BaseTest {
     public void testTransferAppearsInAccountActivity() {
         com.merkosun.model.UserData user = registerUniqueUser();
 
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         loginPage.navigateTo();
         loginPage.login(user.getUsername(), user.getPassword());
         Assert.assertTrue(loginPage.isLoginSuccessful(), "Login should be successful");
 
-        // Transfer gerçekleştir
-        TransferPage transferPage = new TransferPage(driver);
+        TransferPage transferPage = new TransferPage(getDriver());
         transferPage.navigateToTransferFunds();
         transferPage.transferFunds(TRANSFER_AMOUNT);
         Assert.assertTrue(transferPage.isTransferComplete(),
                 "Transfer should complete first");
 
-        // Accounts Overview'a gidip işlemi doğrula
-        AccountOverviewPage overviewPage = new AccountOverviewPage(driver);
+        AccountOverviewPage overviewPage = new AccountOverviewPage(getDriver());
         overviewPage.navigateTo();
         overviewPage.clickFirstAccount();
 
